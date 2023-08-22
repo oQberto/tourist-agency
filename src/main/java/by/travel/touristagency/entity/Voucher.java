@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.EnumType.STRING;
+import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -22,8 +23,12 @@ public class Voucher {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "company_id")
     private Company company;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "name")

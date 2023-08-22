@@ -13,6 +13,8 @@
         <mapping class="by.travel.touristagency.entity.User"/>
         <mapping class="by.travel.touristagency.entity.Profile"/>
         <mapping class="by.travel.touristagency.entity.Company"/>
+        <mapping class="by.travel.touristagency.entity.Voucher"/>
+        <mapping class="by.travel.touristagency.entity.VoucherInfo"/>
         <!-- DB schema will be updated if needed -->
         <!--<property name="hibernate.hbm2ddl.auto">create</property>-->
     </session-factory>
