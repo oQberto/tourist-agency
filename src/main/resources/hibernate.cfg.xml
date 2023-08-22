@@ -12,6 +12,7 @@
 
         <mapping class="by.travel.touristagency.entity.User"/>
         <mapping class="by.travel.touristagency.entity.Profile"/>
+        <mapping class="by.travel.touristagency.entity.Company"/>
         <!-- DB schema will be updated if needed -->
         <!--<property name="hibernate.hbm2ddl.auto">create</property>-->
     </session-factory>
