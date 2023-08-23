@@ -5,7 +5,7 @@ import jakarta.persistence.EntityManager;
 
 public class UserRepository extends BaseRepository<Long, User> {
 
-    public UserRepository(Class<User> clazz, EntityManager entityManager) {
-        super(clazz, entityManager);
+    public UserRepository(EntityManager entityManager) {
+        super(User.class, entityManager);
     }
 }
