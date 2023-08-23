@@ -2,10 +2,7 @@ package by.travel.touristagency.entity;
 
 import by.travel.touristagency.entity.enums.Type;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.EnumType.STRING;
@@ -16,6 +13,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = {"company", "info"})
 @Entity
 public class Voucher {
 

@@ -3,10 +3,7 @@ package by.travel.touristagency.entity;
 import by.travel.touristagency.entity.enums.Country;
 import by.travel.touristagency.entity.enums.Transport;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -18,6 +15,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = "voucher")
 @Entity
 @Table(name = "voucher_info", schema = "public")
 public class VoucherInfo {
