@@ -32,6 +32,9 @@ public class Voucher {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "price")
+    private Double price;
+
     @Column(name = "type")
     @Enumerated(STRING)
     private Type type;
