@@ -4,6 +4,7 @@ import by.travel.touristagency.dto.VoucherFilter;
 import by.travel.touristagency.entity.Company;
 import by.travel.touristagency.entity.User;
 import by.travel.touristagency.entity.Voucher;
+import by.travel.touristagency.entity.enums.Country;
 import by.travel.touristagency.entity.enums.Type;
 import by.travel.touristagency.util.HibernateTestUtil;
 import by.travel.touristagency.util.TestDataImporter;
@@ -63,7 +64,7 @@ class VoucherRepositoryTest {
 
         assertThat(actualResult).isEmpty();
 
-        session.getTransaction().commit();
+        session.getTransaction().rollback();
     }
 
     @Test
@@ -75,7 +76,7 @@ class VoucherRepositoryTest {
 
         Voucher voucher = actualResult.get();
         voucher.setPrice(0.0);
-        voucher.setName(null);
+        voucher.setName("NewNameVoucher5");
         voucherRepository.update(voucher);
 
         Optional<Voucher> actualResultAfterUpdate = voucherRepository.findById(5L);
@@ -148,7 +149,7 @@ class VoucherRepositoryTest {
 
     @Test
     void getFilteredVoucherByPrice() {
-        session. beginTransaction();
+        session.beginTransaction();
 
         VoucherFilter voucherFilter = VoucherFilter.builder()
                 .priceFrom(100.0)
@@ -166,7 +167,7 @@ class VoucherRepositoryTest {
 
     @Test
     void shouldNotFindVouchersIfChosenPriceDoesNotExist() {
-        session. beginTransaction();
+        session.beginTransaction();
 
         VoucherFilter voucherFilter = VoucherFilter.builder()
                 .priceFrom(1000.0)
@@ -180,7 +181,56 @@ class VoucherRepositoryTest {
     }
 
     @Test
+    void getVouchersByType() {
+        session.beginTransaction();
+
+        VoucherFilter voucherFilter = VoucherFilter.builder()
+                .type(Type.SHOPPING)
+                .build();
+
+        List<Voucher> actualResult = voucherRepository.getFilteredVoucher(voucherFilter);
+        assertThat(actualResult).hasSize(2);
+
+        List<String> voucherNames = actualResult.stream()
+                .map(Voucher::getName)
+                .toList();
+        assertThat(voucherNames).contains("Voucher1", "Voucher3");
+
+        session.getTransaction().commit();
+    }
+
+    @Test
+    void getVouchersByCountry() {
+        session.beginTransaction();
+
+        VoucherFilter voucherFilter = VoucherFilter.builder()
+                .country(Country.PL)
+                .build();
+
+        List<Voucher> actualResult = voucherRepository.getFilteredVoucher(voucherFilter);
+        assertThat(actualResult).hasSize(3);
+
+        List<String> voucherNames = actualResult.stream()
+                .map(Voucher::getName)
+                .toList();
+        assertThat(voucherNames).contains("Voucher", "Voucher7", "Voucher8");
+
+        session.getTransaction().commit();
+    }
+
+    @Test
     void getVoucherByAmountOfDays() {
+        session.beginTransaction();
+
+        List<Voucher> actualResult = voucherRepository.getVouchersByAmountOfDays(10);
+        assertThat(actualResult).hasSize(3);
+
+        List<String> voucherNames = actualResult.stream()
+                .map(Voucher::getName)
+                .toList();
+        assertThat(voucherNames).contains("Voucher9", "Voucher3", "NewNameVoucher5");
+
+        session.getTransaction().commit();
     }
 
     @Test

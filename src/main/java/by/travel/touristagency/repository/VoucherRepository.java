@@ -28,12 +28,12 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
                 .fetch();
     }
 
-    public List<Voucher> getVoucherByAmountOfDays(Integer amountOfDays) {
+    public List<Voucher> getVouchersByAmountOfDays(Integer amountOfDays) {
         NumberTemplate<Integer> expression = Expressions.numberTemplate(
                 Integer.class,
-                "function('dateDiff', {0}, {1}",
-                voucher.info.endOn,
-                voucher.info.startOn
+                "timestampdiff(day, {0}, {1})",
+                voucher.info.startOn,
+                voucher.info.endOn
         );
 
         return new JPAQuery<Voucher>(getEntityManager())
