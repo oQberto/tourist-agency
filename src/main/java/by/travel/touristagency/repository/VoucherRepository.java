@@ -6,6 +6,8 @@ import by.travel.touristagency.entity.enums.Country;
 import by.travel.touristagency.entity.enums.Transport;
 import by.travel.touristagency.entity.enums.Type;
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.NumberTemplate;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;
 
@@ -26,6 +28,21 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
                 .select(voucher)
                 .from(voucher)
                 .where(predicate)
+                .fetch();
+    }
+
+    public List<Voucher> getVoucherByAmountOfDays(Integer amountOfDays) {
+        NumberTemplate<Integer> expression = Expressions.numberTemplate(
+                Integer.class,
+                "function('dateDiff', {0}, {1}",
+                voucher.info.endOn,
+                voucher.info.startOn
+        );
+
+        return new JPAQuery<Voucher>(getEntityManager())
+                .select(voucher)
+                .from(voucher)
+                .where(expression.goe(amountOfDays))
                 .fetch();
     }
 
