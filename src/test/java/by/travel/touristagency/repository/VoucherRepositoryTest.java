@@ -1,5 +1,6 @@
 package by.travel.touristagency.repository;
 
+import by.travel.touristagency.dto.VoucherFilter;
 import by.travel.touristagency.entity.Company;
 import by.travel.touristagency.entity.User;
 import by.travel.touristagency.entity.Voucher;
@@ -10,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -125,7 +127,23 @@ class VoucherRepositoryTest {
     }
 
     @Test
-    void getFilteredVoucher() {
+    void getFilteredVoucherByName() {
+        session.beginTransaction();
+
+        Optional<Voucher> existingVoucher = voucherRepository.findById(2L);
+        assertThat(existingVoucher).isPresent();
+
+        VoucherFilter voucherFilter = VoucherFilter.builder()
+                .name(existingVoucher.get().getName())
+                .build();
+
+        List<Voucher> actualResult = voucherRepository.getFilteredVoucher(voucherFilter);
+        assertThat(actualResult).hasSize(1);
+
+        List<String> voucherNames = actualResult.stream().map(Voucher::getName).toList();
+        assertThat(voucherNames).contains("Voucher1");
+
+        session.getTransaction().commit();
     }
 
     @Test

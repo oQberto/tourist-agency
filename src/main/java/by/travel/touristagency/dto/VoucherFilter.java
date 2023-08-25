@@ -17,5 +17,5 @@ public class VoucherFilter {
     Country country;
     Integer amountOfDays;
     Transport transport;
-    boolean food;
+    Boolean food;
 }
