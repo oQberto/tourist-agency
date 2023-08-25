@@ -8,7 +8,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 
 @UtilityClass
 public class HibernateTestUtil {
-    private static final PostgreSQLContainer<?> POSTGRES = new PostgreSQLContainer<>("postgres:13");
+    private static final PostgreSQLContainer<?> POSTGRES = new PostgreSQLContainer<>("postgres:15");
 
     static {
         POSTGRES.start();
@@ -17,8 +17,8 @@ public class HibernateTestUtil {
     public static SessionFactory buildSessionFactory() {
         Configuration configuration = buildConfiguration();
         configuration.setProperty("hibernate.connection.url", POSTGRES.getJdbcUrl());
-        configuration.setProperty("hibernate.configuration.username", POSTGRES.getUsername());
-        configuration.setProperty("hibernate.configuration.password", POSTGRES.getPassword());
+        configuration.setProperty("hibernate.connection.username", POSTGRES.getUsername());
+        configuration.setProperty("hibernate.connection.password", POSTGRES.getPassword());
         configuration.configure();
 
         return configuration.buildSessionFactory();
@@ -27,4 +27,5 @@ public class HibernateTestUtil {
     private static Configuration buildConfiguration() {
         return new Configuration();
     }
+
 }
