@@ -147,6 +147,39 @@ class VoucherRepositoryTest {
     }
 
     @Test
+    void getFilteredVoucherByPrice() {
+        session. beginTransaction();
+
+        VoucherFilter voucherFilter = VoucherFilter.builder()
+                .priceFrom(100.0)
+                .priceTo(125.0)
+                .build();
+
+        List<Voucher> actualResult = voucherRepository.getFilteredVoucher(voucherFilter);
+        assertThat(actualResult).hasSize(2);
+
+        List<String> voucherNames = actualResult.stream().map(Voucher::getName).toList();
+        assertThat(voucherNames).contains("Voucher", "Voucher10");
+
+        session.getTransaction().commit();
+    }
+
+    @Test
+    void shouldNotFindVouchersIfChosenPriceDoesNotExist() {
+        session. beginTransaction();
+
+        VoucherFilter voucherFilter = VoucherFilter.builder()
+                .priceFrom(1000.0)
+                .priceTo(1000.0)
+                .build();
+
+        List<Voucher> actualResult = voucherRepository.getFilteredVoucher(voucherFilter);
+        assertThat(actualResult).hasSize(0);
+
+        session.getTransaction().commit();
+    }
+
+    @Test
     void getVoucherByAmountOfDays() {
     }
 
