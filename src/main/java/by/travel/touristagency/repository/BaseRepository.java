@@ -32,6 +32,6 @@ public class BaseRepository<K extends Serializable, E> implements Repository<K, 
     @Override
     public void delete(K id) {
         E deletableEntity = entityManager.find(clazz, id);
-        entityManager.refresh(deletableEntity);
+        entityManager.remove(deletableEntity);
     }
 }
