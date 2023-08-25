@@ -1,10 +1,18 @@
 package by.travel.touristagency.repository;
 
+import by.travel.touristagency.entity.Company;
+import by.travel.touristagency.entity.User;
+import by.travel.touristagency.entity.Voucher;
+import by.travel.touristagency.entity.enums.Type;
 import by.travel.touristagency.util.HibernateTestUtil;
 import by.travel.touristagency.util.TestDataImporter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
+
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class VoucherRepositoryTest {
     private static final SessionFactory SESSION_FACTORY = HibernateTestUtil.buildSessionFactory();
@@ -33,23 +41,87 @@ class VoucherRepositoryTest {
     }
 
     @Test
-    void findById() {
+    void shouldFindVoucherById() {
+        session.beginTransaction();
 
+        Optional<Voucher> actualResult = voucherRepository.findById(1L);
+
+        assertThat(actualResult).isPresent();
+        assertThat(actualResult.get().getUser().getEmail()).isEqualTo("uname@gmail.com");
+
+        session.getTransaction().commit();
     }
 
     @Test
-    void update() {
+    void shouldNotFindVoucherIfDoesntExist() {
+        session.beginTransaction();
 
+        voucherRepository.delete(4L);
+        Optional<Voucher> actualResult = voucherRepository.findById(4L);
+
+        assertThat(actualResult).isEmpty();
+
+        session.getTransaction().commit();
     }
 
     @Test
-    void save() {
+    void updateExistingVoucher() {
+        session.beginTransaction();
 
+        Optional<Voucher> actualResult = voucherRepository.findById(5L);
+        assertThat(actualResult).isPresent();
+
+        Voucher voucher = actualResult.get();
+        voucher.setPrice(0.0);
+        voucher.setName(null);
+        voucherRepository.update(voucher);
+
+        Optional<Voucher> actualResultAfterUpdate = voucherRepository.findById(5L);
+        assertThat(actualResultAfterUpdate).isPresent();
+        assertThat(actualResultAfterUpdate.get()).isEqualTo(voucher);
+
+        session.getTransaction().commit();
     }
 
     @Test
-    void delete() {
+    void shouldSaveIfVoucherDoesNotExist() {
+        session.beginTransaction();
 
+        Optional<Voucher> existingVoucher = voucherRepository.findById(1L);
+        assertThat(existingVoucher).isPresent();
+
+        User user = existingVoucher.get().getUser();
+        Company company = existingVoucher.get().getCompany();
+        Voucher voucher = Voucher.builder()
+                .user(user)
+                .company(company)
+                .name("New Voucher")
+                .price(0.0)
+                .type(Type.THERAPY)
+                .description(null)
+                .build();
+        Voucher savedVoucher = voucherRepository.save(voucher);
+
+        Optional<Voucher> actualResult = voucherRepository.findById(savedVoucher.getId());
+        assertThat(actualResult).isPresent();
+        assertThat(actualResult.get().getUser().getEmail()).isEqualTo("uname@gmail.com");
+
+        session.getTransaction().commit();
+    }
+
+    @Test
+    void shouldDeleteIfVoucherExists() {
+        session.beginTransaction();
+
+        Optional<Voucher> actualResult = voucherRepository.findById(6L);
+        assertThat(actualResult).isPresent();
+
+        voucherRepository.delete(actualResult.get().getId());
+
+        Optional<Voucher> voucherAfterDelete = voucherRepository.findById(6L);
+        assertThat(voucherAfterDelete).isEmpty();
+
+        session.getTransaction().commit();
     }
 
     @Test
