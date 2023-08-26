@@ -113,4 +113,20 @@ class UserRepositoryTest {
 
         session.getTransaction().rollback();
     }
+
+    @Test
+    void shouldFindUserByEmailAndPassword() {
+        session.beginTransaction();
+
+        Optional<User> user = userRepository.findById(1L);
+        assertThat(user).isPresent();
+        String email = "uname@gmail.com";
+        String password = "123";
+
+        Optional<User> actualResult = userRepository.findByEmailAndPassword(email, password);
+        assertThat(actualResult).isPresent();
+        assertThat(actualResult).isEqualTo(user);
+
+        session.getTransaction().commit();
+    }
 }
