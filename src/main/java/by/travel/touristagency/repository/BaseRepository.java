@@ -1,17 +1,22 @@
 package by.travel.touristagency.repository;
 
 import jakarta.persistence.EntityManager;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Optional;
 
 @Data
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class BaseRepository<K extends Serializable, E> implements Repository<K, E>{
     private final Class<E> clazz;
-    private final EntityManager entityManager;
+
+    @Setter
+    private EntityManager entityManager;
 
     @Override
     public Optional<E> findById(K id) {
