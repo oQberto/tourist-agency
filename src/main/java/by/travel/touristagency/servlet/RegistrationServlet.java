@@ -30,6 +30,6 @@ public class RegistrationServlet extends HttpServlet {
                 .build();
 
         userService.createUser(createUserDto);
-        resp.sendRedirect("/hello-servlet");
+        resp.sendRedirect("/travel_by");
     }
 }
