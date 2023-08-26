@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberTemplate;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;
+import org.hibernate.query.SortDirection;
 
 import java.util.List;
 
@@ -43,38 +44,17 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
                 .fetch();
     }
 
-    public List<Voucher> getVouchersSortedByPriceASC() {
-        return new JPAQuery<Voucher>(getEntityManager())
+    public List<Voucher> getVouchersSortedByPrice(SortDirection sortDirection) {
+        JPAQuery<Voucher> query = new JPAQuery<>()
                 .select(voucher)
-                .from(voucher)
-                .orderBy(voucher.price.asc())
-                .fetch();
-    }
+                .from(voucher);
 
-    public List<Voucher> getVouchersSortedByPriceDESC() {
-
-        return new JPAQuery<Voucher>(getEntityManager())
-                .select(voucher)
-                .from(voucher)
-                .orderBy(voucher.price.desc())
-                .fetch();
-    }
-
-    public List<Voucher> getVouchersSortedByFoodASC() {
-        return new JPAQuery<Voucher>(getEntityManager())
-                .select(voucher)
-                .from(voucher)
-                .orderBy(voucher.info.isFoodInclude.asc())
-                .fetch();
-    }
-
-    public List<Voucher> getVouchersSortedByFoodDESC() {
-
-        return new JPAQuery<Voucher>(getEntityManager())
-                .select(voucher)
-                .from(voucher)
-                .orderBy(voucher.info.isFoodInclude.desc())
-                .fetch();
+        if (sortDirection == SortDirection.ASCENDING) {
+            query.orderBy(voucher.price.asc());
+        } else if (sortDirection == SortDirection.DESCENDING) {
+            query.orderBy(voucher.price.desc());
+        }
+        return query.fetch();
     }
 
     private static Predicate buildPredicate(VoucherFilter filter) {
@@ -83,9 +63,9 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
                 .add(filter.getPriceFrom(), voucher.price::goe)
                 .add(filter.getPriceTo(), voucher.price::loe)
                 .add(filter.getType(), voucher.type::eq)
-                .add((filter.getCountry()), voucher.info.country::eq)
-                .add((filter.getTransport()), voucher.info.transport::eq)
-                .add(filter.getFood(), voucher.info.isFoodInclude::eq)
+                .add(filter.getCountry(), voucher.info.country::eq)
+                .add(filter.getTransport(), voucher.info.transport::eq)
+                .add(filter.getFood(), voucher.info.food::eq)
                 .buildAnd();
     }
 }
