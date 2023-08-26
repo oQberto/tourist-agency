@@ -136,7 +136,7 @@ SELECT v.id,
        i.food
 FROM voucher_info i
          LEFT JOIN voucher v on i.voucher_id = v.id
-WHERE i.transport = 'PLANE';
+WHERE i.transport = 'BUS';
 
 -- 2. Select voucher by food
 SELECT v.id,
@@ -151,7 +151,7 @@ SELECT v.id,
        i.food
 FROM voucher v
          LEFT JOIN voucher_info i ON v.id = i.id
-WHERE food = true;
+WHERE i.food = 'AI';
 
 -- 3. Select voucher by amount of the days
 SELECT v.id,
@@ -182,7 +182,8 @@ SELECT v.id,
 FROM voucher v
          LEFT JOIN voucher_info i ON v.id = i.id
 WHERE v.type = 'SHOPPING'
-   OR v.type = 'CRUISE';
+   AND v.price >= 125.0 AND v.price <= 139.0
+AND i.transport = 'PLANE';
 
 -- 5. Select by company
 SELECT v.id,
