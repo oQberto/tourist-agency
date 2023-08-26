@@ -44,7 +44,7 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
                 .fetch();
     }
 
-    public List<Voucher> getVouchersSortedByPrice(SortDirection sortDirection) {
+    public List<Voucher> getVouchersSortedByPrice(SortDirection sortDirection, int limit) {
         JPAQuery<Voucher> query = new JPAQuery<>()
                 .select(voucher)
                 .from(voucher);
@@ -54,7 +54,9 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
         } else if (sortDirection == SortDirection.DESCENDING) {
             query.orderBy(voucher.price.desc());
         }
-        return query.fetch();
+        return query
+                .limit(limit)
+                .fetch();
     }
 
     private static Predicate buildPredicate(VoucherFilter filter) {
