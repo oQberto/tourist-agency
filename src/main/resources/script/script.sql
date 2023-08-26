@@ -166,7 +166,7 @@ SELECT v.id,
        i.food
 FROM voucher v
          LEFT JOIN voucher_info i ON v.id = i.id
-WHERE dateDiff(i.end_on, i.start_on) > 10;
+WHERE dateDiff(i.end_on, i.start_on) >= 10;
 
 -- 4. Select by voucher type
 SELECT v.id,
@@ -230,7 +230,8 @@ SELECT v.id,
        i.food
 FROM voucher v
          LEFT JOIN voucher_info i ON v.id = i.id
-ORDER BY v.price;
+ORDER BY v.price
+LIMIT 6;
 
 -- 2. Sort vouchers by amount of the days
 SELECT v.id,

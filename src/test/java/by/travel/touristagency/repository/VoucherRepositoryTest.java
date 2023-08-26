@@ -10,6 +10,7 @@ import by.travel.touristagency.util.HibernateTestUtil;
 import by.travel.touristagency.util.TestDataImporter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.SortDirection;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
@@ -83,7 +84,7 @@ class VoucherRepositoryTest {
         assertThat(actualResultAfterUpdate).isPresent();
         assertThat(actualResultAfterUpdate.get()).isEqualTo(voucher);
 
-        session.getTransaction().commit();
+        session.getTransaction().rollback();
     }
 
     @Test
@@ -228,24 +229,38 @@ class VoucherRepositoryTest {
         List<String> voucherNames = actualResult.stream()
                 .map(Voucher::getName)
                 .toList();
-        assertThat(voucherNames).contains("Voucher9", "Voucher3", "NewNameVoucher5");
+        assertThat(voucherNames).contains("Voucher9", "Voucher3", "Voucher4");
 
         session.getTransaction().commit();
     }
 
     @Test
     void getVouchersSortedByPriceASC() {
+        session.beginTransaction();
+
+        List<Voucher> actualResult = voucherRepository.getVouchersSortedByPrice(SortDirection.ASCENDING, 5);
+        assertThat(actualResult).hasSize(5);
+
+        List<String> voucherNames = actualResult.stream()
+                .map(Voucher::getName)
+                .toList();
+        assertThat(voucherNames).contains("Voucher10", "Voucher", "Voucher8", "Voucher1", "Voucher9");
+
+        session.getTransaction().commit();
     }
 
     @Test
     void getVouchersSortedByPriceDESC() {
-    }
+        session.beginTransaction();
 
-    @Test
-    void getVouchersSortedByFoodASC() {
-    }
+        List<Voucher> actualResult = voucherRepository.getVouchersSortedByPrice(SortDirection.DESCENDING, 5);
+        assertThat(actualResult).hasSize(5);
 
-    @Test
-    void getVouchersSortedByFoodDESC() {
+        List<String> voucherNames = actualResult.stream()
+                .map(Voucher::getName)
+                .toList();
+        assertThat(voucherNames).contains("Voucher7", "Voucher6", "Voucher5", "Voucher4", "Voucher3");
+
+        session.getTransaction().commit();
     }
 }

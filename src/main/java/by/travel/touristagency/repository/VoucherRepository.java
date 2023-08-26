@@ -45,7 +45,7 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
     }
 
     public List<Voucher> getVouchersSortedByPrice(SortDirection sortDirection, int limit) {
-        JPAQuery<Voucher> query = new JPAQuery<>()
+        JPAQuery<Voucher> query = new JPAQuery<>(getEntityManager())
                 .select(voucher)
                 .from(voucher);
 
