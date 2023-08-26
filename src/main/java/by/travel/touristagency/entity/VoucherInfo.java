@@ -1,6 +1,7 @@
 package by.travel.touristagency.entity;
 
 import by.travel.touristagency.entity.enums.Country;
+import by.travel.touristagency.entity.enums.Food;
 import by.travel.touristagency.entity.enums.Transport;
 import jakarta.persistence.*;
 import lombok.*;
@@ -43,5 +44,5 @@ public class VoucherInfo {
     private Transport transport;
 
     @Column(name = "food")
-    private boolean isFoodInclude;
+    private Food food;
 }

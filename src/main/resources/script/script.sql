@@ -119,6 +119,9 @@ VALUES (1, 'BY', '2023-08-22', '2023-08-30', 'BUS', true),
        (17, 'BY', '2023-10-10', '2023-10-20', 'BUS', true),
        (18, 'USA', '2023-11-01', '2023-11-08', 'PLANE', false);
 
+ALTER TABLE voucher_info
+ALTER COLUMN food TYPE VARCHAR(32);
+
 -- Select queries
 -- 1. Select voucher by transport
 SELECT v.id,

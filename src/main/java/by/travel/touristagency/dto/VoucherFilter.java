@@ -1,6 +1,7 @@
 package by.travel.touristagency.dto;
 
 import by.travel.touristagency.entity.enums.Country;
+import by.travel.touristagency.entity.enums.Food;
 import by.travel.touristagency.entity.enums.Transport;
 import by.travel.touristagency.entity.enums.Type;
 import lombok.Builder;
@@ -17,5 +18,5 @@ public class VoucherFilter {
     Country country;
     Integer amountOfDays;
     Transport transport;
-    Boolean food;
+    Food food;
 }

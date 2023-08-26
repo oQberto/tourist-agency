@@ -2,6 +2,7 @@ package by.travel.touristagency.util;
 
 import by.travel.touristagency.entity.*;
 import by.travel.touristagency.entity.enums.Country;
+import by.travel.touristagency.entity.enums.Food;
 import by.travel.touristagency.entity.enums.Transport;
 import by.travel.touristagency.entity.enums.Type;
 import lombok.experimental.UtilityClass;
@@ -62,17 +63,17 @@ public class TestDataImporter {
             Voucher voucher9 = saveVoucher(session, spainTouristAgency, user12, "Voucher9", 143.55, Type.THERAPY, null);
             Voucher voucher10 = saveVoucher(session, spainTouristAgency, user, "Voucher10", 123.45, Type.REST, null);
 
-            saveVoucherInfo(session, voucher, Country.PL, LocalDate.of(2023, 8, 22), LocalDate.of(2023, 8, 30), Transport.BUS, false);
-            saveVoucherInfo(session, voucher1, Country.BY, LocalDate.of(2023, 9, 22), LocalDate.of(2023, 9, 30), Transport.PLANE, true);
-            saveVoucherInfo(session, voucher2, Country.UK, LocalDate.of(2023, 9, 10), LocalDate.of(2023, 9, 16), Transport.CRUISE, false);
-            saveVoucherInfo(session, voucher3, Country.USA, LocalDate.of(2023, 9, 22), LocalDate.of(2023, 10, 5), Transport.BUS, true);
-            saveVoucherInfo(session, voucher4, Country.BY, LocalDate.of(2023, 10, 10), LocalDate.of(2023, 10, 20), Transport.BUS, false);
-            saveVoucherInfo(session, voucher5, Country.UK, LocalDate.of(2023, 11, 1), LocalDate.of(2023, 11, 8), Transport.BUS, true);
-            saveVoucherInfo(session, voucher6, Country.USA, LocalDate.of(2024, 1, 22), LocalDate.of(2024, 1, 30), Transport.PLANE, true);
-            saveVoucherInfo(session, voucher7, Country.PL, LocalDate.of(2024, 2, 22), LocalDate.of(2024, 2, 28), Transport.BUS, true);
-            saveVoucherInfo(session, voucher8, Country.PL, LocalDate.of(2024, 3, 10), LocalDate.of(2024, 3, 16), Transport.CRUISE, true);
-            saveVoucherInfo(session, voucher9, Country.BY, LocalDate.of(2024, 4, 15), LocalDate.of(2024, 4, 30), Transport.BUS, true);
-            saveVoucherInfo(session, voucher10, Country.USA, LocalDate.of(2024, 6, 20), LocalDate.of(2024, 6, 28), Transport.PLANE, true);
+            saveVoucherInfo(session, voucher, Country.PL, LocalDate.of(2023, 8, 22), LocalDate.of(2023, 8, 30), Transport.BUS, Food.AI);
+            saveVoucherInfo(session, voucher1, Country.BY, LocalDate.of(2023, 9, 22), LocalDate.of(2023, 9, 30), Transport.PLANE,  Food.EP);
+            saveVoucherInfo(session, voucher2, Country.UK, LocalDate.of(2023, 9, 10), LocalDate.of(2023, 9, 16), Transport.CRUISE,  Food.AI);
+            saveVoucherInfo(session, voucher3, Country.USA, LocalDate.of(2023, 9, 22), LocalDate.of(2023, 10, 5), Transport.BUS,  Food.BB);
+            saveVoucherInfo(session, voucher4, Country.BY, LocalDate.of(2023, 10, 10), LocalDate.of(2023, 10, 20), Transport.BUS,  Food.EP);
+            saveVoucherInfo(session, voucher5, Country.UK, LocalDate.of(2023, 11, 1), LocalDate.of(2023, 11, 8), Transport.BUS,  Food.BB);
+            saveVoucherInfo(session, voucher6, Country.USA, LocalDate.of(2024, 1, 22), LocalDate.of(2024, 1, 30), Transport.PLANE,  Food.FB);
+            saveVoucherInfo(session, voucher7, Country.PL, LocalDate.of(2024, 2, 22), LocalDate.of(2024, 2, 28), Transport.BUS,  Food.RO);
+            saveVoucherInfo(session, voucher8, Country.PL, LocalDate.of(2024, 3, 10), LocalDate.of(2024, 3, 16), Transport.CRUISE,  Food.HB);
+            saveVoucherInfo(session, voucher9, Country.BY, LocalDate.of(2024, 4, 15), LocalDate.of(2024, 4, 30), Transport.BUS,  Food.AI);
+            saveVoucherInfo(session, voucher10, Country.USA, LocalDate.of(2024, 6, 20), LocalDate.of(2024, 6, 28), Transport.PLANE,  Food.RO);
 
             session.getTransaction().commit();
         }
@@ -148,14 +149,14 @@ public class TestDataImporter {
                                  LocalDate startOn,
                                  LocalDate endOn,
                                  Transport transport,
-                                 boolean food) {
+                                 Food food) {
         VoucherInfo voucherInfo = VoucherInfo.builder()
                 .voucher(voucher)
                 .country(country)
                 .startOn(startOn)
                 .endOn(endOn)
                 .transport(transport)
-                .isFoodInclude(food)
+                .food(food)
                 .build();
 
         session.persist(voucherInfo);
