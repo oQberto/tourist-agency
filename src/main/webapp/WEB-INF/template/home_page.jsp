@@ -50,30 +50,14 @@
 </div>
 
 <div class="companies">
-    <a href="${pageContext.request.contextPath}/vouchers?companyId=1">
-        <img src='<c:url value="/image/spain.webp"/>' alt="Spain Tour">
-        <h3 class="company1">
-            <span>Spain Tour</span>
-        </h3>
-    </a>
-    <a href="${pageContext.request.contextPath}/vouchers?companyId=2">
-        <img src='<c:url value="/image/greece.webp"/>' alt="Greece Tour">
-        <h3 class="company2">
-            <span>Greece Tour</span>
-        </h3>
-    </a>
-    <a href="${pageContext.request.contextPath}/vouchers?companyId=3">
-        <img src='<c:url value="/image/belarus.webp"/>' alt="Belarus Tour">
-        <h3 class="company3">
-            <span>Belarus Tour</span>
-        </h3>
-    </a>
-    <a href="${pageContext.request.contextPath}/vouchers?companyId=4">
-        <img src='<c:url value="/image/brazil.webp"/>' alt="Brazil Tour">
-        <h3 class="company4">
-            <span>Brazil Tour</span>
-        </h3>
-    </a>
+    <c:forEach var="company" items="${requestScope.companies}">
+        <a href="${pageContext.request.contextPath}/vouchers?companyId=${company.id}">
+            <img src='<c:url value="/image/${company.image}"/>' alt="${company.name}">
+            <h3 class="company${company.id}">
+                <span>${company.name}</span>
+            </h3>
+        </a>
+    </c:forEach>
 </div>
 
 <footer>

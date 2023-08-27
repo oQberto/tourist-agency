@@ -24,6 +24,9 @@ public class Company {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "company_image")
+    private String image;
+
     @OneToMany(
             mappedBy = "company",
             cascade = ALL,

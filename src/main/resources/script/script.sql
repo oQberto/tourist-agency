@@ -51,6 +51,9 @@ CREATE TABLE company
     name VARCHAR(128) NOT NULL
 );
 
+ALTER TABLE company
+ADD COLUMN company_image VARCHAR(128);
+
 INSERT INTO company(name)
 VALUES ('Company1'),
        ('Company2'),
