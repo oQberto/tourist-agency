@@ -10,7 +10,9 @@
 <html>
 <head>
     <title>Travel.by</title>
-<style><%@include file="/css/home_page.css"%></style>
+    <style>
+        <%@include file="/css/home_page.css" %>
+    </style>
 </head>
 <body>
 <header class="header">
@@ -19,17 +21,15 @@
         <a href="#" class="logo">Travel.by</a>
     </div>
     <nav class="navbar">
-        <a href="${pageContext.request.contextPath}/registration">Registration</a>
-        <a href="${pageContext.request.contextPath}/login">Login</a>
-        <div>
-            <c:if test="${not empty sessionScope.user}">
-                <div id="logout">
-                    <form action="${pageContext.request.contextPath}/logout" method="post">
-                        <button type="submit">Logout</button>
-                    </form>
-                </div>
-            </c:if>
-        </div>
+        <a href="#">About</a>
+        <c:if test="${empty sessionScope.user}">
+            <a href="${pageContext.request.contextPath}/login">Login</a>
+        </c:if>
+        <c:if test="${not empty sessionScope.user}">
+            <a href="${pageContext.request.contextPath}/logout">Logout</a>
+        </c:if>
+        <a href="#">Post a voucher</a>
+        <a href="#">Contact</a>
     </nav>
 </header>
 
