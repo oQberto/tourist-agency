@@ -19,13 +19,6 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
         super(Voucher.class, entityManager);
     }
 
-    public List<Voucher> getAllVouchers() {
-        return new JPAQuery<Voucher>(getEntityManager())
-                .select(voucher)
-                .from(voucher)
-                .fetch();
-    }
-
     public List<Voucher> getFilteredVoucher(VoucherFilter filter) {
         Predicate predicate = buildPredicate(filter);
 

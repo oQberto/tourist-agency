@@ -50,7 +50,7 @@ class VoucherRepositoryTest {
     void shouldFindAllVouchers() {
         session.beginTransaction();
 
-        List<Voucher> actualResult = voucherRepository.getAllVouchers();
+        List<Voucher> actualResult = voucherRepository.getAll();
         assertThat(actualResult).hasSize(11);
 
         session.getTransaction().commit();

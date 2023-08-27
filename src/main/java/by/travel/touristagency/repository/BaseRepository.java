@@ -7,16 +7,29 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class BaseRepository<K extends Serializable, E> implements Repository<K, E>{
+public class BaseRepository<K extends Serializable, E> implements Repository<K, E> {
     private final Class<E> clazz;
 
     @Setter
     private EntityManager entityManager;
+
+    @Override
+    public List<E> getAll() {
+        var criteria = entityManager
+                .getCriteriaBuilder()
+                .createQuery(clazz);
+        criteria.from(clazz);
+
+        return entityManager
+                .createQuery(criteria)
+                .getResultList();
+    }
 
     @Override
     public Optional<E> findById(K id) {
