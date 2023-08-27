@@ -13,7 +13,7 @@ import org.hibernate.SessionFactory;
 
 import java.io.IOException;
 
-@WebServlet( value = "/travel_by")
+@WebServlet("/travel_by")
 public class MainServlet extends HttpServlet {
     private final CompanyService companyService = CompanyService.getInstance();
     private SessionFactory sessionFactory;

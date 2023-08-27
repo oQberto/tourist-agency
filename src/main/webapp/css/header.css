@@ -1,0 +1,278 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 350px;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+    /*background: #3cb6d3;*/
+}
+
+body {
+    min-height: 100vh;
+    background-size: cover;
+    background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("/image/background.webp") no-repeat center;
+}
+
+.logo_div a {
+    position: absolute;
+    left: 170px;
+}
+
+.logo {
+    font-size: 32px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.navbar a {
+    position: relative;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+    text-decoration: transparent;
+    margin-left: 40px;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.navbar a:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.input-section {
+    position: absolute;
+    top: 80px;
+}
+
+.intro {
+    position: absolute;
+    top: 160px;
+    left: 700px;
+
+    color: white;
+    z-index: 101;
+}
+
+.intro h1 {
+    text-align: center;
+    font-size: 45px;
+}
+
+.intro h2 {
+    text-align: center;
+}
+
+.search_box {
+    position: absolute;
+    top: 250px;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background: #fff;
+    height: 50px;
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 101;
+}
+
+.search_btn {
+    color: #1da1f3;
+    float: right;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.search_txt {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: black;
+    font-size: 20px;
+    font-family: Arial, serif;
+    transition: 0.4s;
+    line-height: 30px;
+    width: 640px;
+}
+
+.desc {
+    position: absolute;
+    top: 450px;
+    left: 655px;
+}
+
+.desc h1 {
+    text-align: center;
+    color: #fff;
+}
+
+.desc h2 {
+    color: #fff;
+}
+
+.companies {
+    position: absolute;
+    display: grid;
+    top: 580px;
+    left: 500px;
+
+    grid-template-rows: 70px 70px;
+    grid-template-columns: 170px 170px 170px;
+    grid-column-gap: 150px;
+    grid-row-gap: 100px;
+}
+
+.companies a {
+    width: 300px;
+    height: 160px;
+
+    text-align: center;
+    text-decoration: none;
+}
+
+.companies img {
+    border: 5px white;
+}
+
+.companies a img {
+    width: 300px;
+    height: 160px;
+}
+
+.company1 {
+    color: white;
+    position: absolute;
+    top: 81px;
+    left: 155px;
+    transform: translate(-50%, -50%);
+}
+
+.company2 {
+    color: white;
+    position: absolute;
+    top: 85px;
+    left: 465px;
+    transform: translate(-50%, -50%);
+}
+
+.company3 {
+    color: white;
+    position: absolute;
+    top: 85px;
+    left: 795px;
+    transform: translate(-50%, -50%);
+}
+
+.company4 {
+    color: white;
+    position: absolute;
+    top: 271px;
+    left: 155px;
+    transform: translate(-50%, -50%);
+}
+
+footer {
+    position: absolute;
+    top: 1120px;
+    left: 0;
+    right: 0;
+    background: #3cb6d3;
+    height: auto;
+    width: 100vw;
+    padding-top: 40px;
+    color: #fff;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer-content h3 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 3rem;
+}
+
+.footer-content p {
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 28px;
+    font-size: 14px;
+}
+
+.socials {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+
+.socials li {
+    margin: 0 10px;
+}
+
+.socials a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.socials a img {
+    font-size: 1.1rem;
+    transition: color .4s ease;
+}
+
+.footer-bottom {
+    background: #3cb6d3;
+    width: 100vw;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+}
+
+.footer-bottom span {
+    text-transform: uppercase;
+    opacity: .6;
+    font-weight: 200;
+}
