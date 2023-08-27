@@ -1,6 +1,9 @@
 package by.travel.touristagency.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +24,14 @@ public class BaseRepository<K extends Serializable, E> implements Repository<K, 
 
     @Override
     public List<E> getAll() {
-        var criteria = entityManager
-                .getCriteriaBuilder()
-                .createQuery(clazz);
-        criteria.from(clazz);
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<E> criteriaQuery = criteriaBuilder.createQuery(clazz);
+        Root<E> root = criteriaQuery.from(clazz);
+
+        criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
 
         return entityManager
-                .createQuery(criteria)
+                .createQuery(criteriaQuery)
                 .getResultList();
     }
 
