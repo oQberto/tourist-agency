@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Travel.by</title>
-<style><%@include file="/css/header.css"%></style>
+<style><%@include file="/css/home_page.css"%></style>
 </head>
 <body>
 <header class="header">

@@ -3,7 +3,6 @@ package by.travel.touristagency.servlet;
 import by.travel.touristagency.dto.CreateUserDto;
 import by.travel.touristagency.service.UserService;
 import by.travel.touristagency.util.HibernateSessionFactoryUtil;
-import by.travel.touristagency.util.JSPHelper;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,12 +23,6 @@ public class RegistrationServlet extends HttpServlet {
         super.init(config);
 
         sessionFactory = HibernateSessionFactoryUtil.getInstance().buildSessionFactory();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(JSPHelper.get("registration"))
-                .forward(req, resp);
     }
 
     @Override

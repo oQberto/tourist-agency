@@ -28,7 +28,7 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("companies", companyService.getAllCompanies(sessionFactory));
-        req.getRequestDispatcher(JSPHelper.get("main"))
+        req.getRequestDispatcher(JSPHelper.get("home_page"))
                 .forward(req, resp);
     }
 }
