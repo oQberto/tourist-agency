@@ -57,6 +57,21 @@ class VoucherRepositoryTest {
     }
 
     @Test
+    void shouldFindVouchersByCompanyId() {
+        session.beginTransaction();
+
+        List<Voucher> actualResult = voucherRepository.getVouchersByCompanyId(2L);
+        assertThat(actualResult).hasSize(3);
+
+        List<String> voucherNames = actualResult.stream()
+                .map(Voucher::getName)
+                .toList();
+        assertThat(voucherNames).contains("Voucher", "Voucher2", "Voucher8");
+
+        session.getTransaction().commit();
+    }
+
+    @Test
     void shouldFindVoucherById() {
         session.beginTransaction();
 
@@ -122,7 +137,7 @@ class VoucherRepositoryTest {
         assertThat(actualResult).isPresent();
         assertThat(actualResult.get().getUser().getEmail()).isEqualTo("uname@gmail.com");
 
-        session.getTransaction().commit();
+        session.getTransaction().rollback();
     }
 
     @Test

@@ -29,6 +29,14 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
                 .fetch();
     }
 
+    public List<Voucher> getVouchersByCompanyId(Long companyId) {
+        return new JPAQuery<Voucher>(getEntityManager())
+                .select(voucher)
+                .from(voucher)
+                .where(voucher.company.id.eq(companyId))
+                .fetch();
+    }
+
     public List<Voucher> getVouchersByAmountOfDays(Integer amountOfDays) {
         NumberTemplate<Integer> expression = Expressions.numberTemplate(
                 Integer.class,

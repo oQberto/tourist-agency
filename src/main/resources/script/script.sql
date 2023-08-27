@@ -201,6 +201,22 @@ FROM voucher v
          LEFT JOIN company c on v.company_id = c.id
 WHERE c.name = 'Company2';
 
+-- 5.1. Select by company id
+SELECT v.id,
+       v.name,
+       v.price,
+       v.type,
+       v.description,
+       i.country,
+       i.start_on,
+       i.end_on,
+       i.transport,
+       i.food
+FROM voucher v
+         LEFT JOIN voucher_info i ON v.id = i.id
+         LEFT JOIN company c on v.company_id = c.id
+WHERE c.id = 1;
+
 -- 6. Select by country
 SELECT v.id,
        v.name,

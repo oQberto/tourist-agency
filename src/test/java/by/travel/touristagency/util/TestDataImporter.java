@@ -51,17 +51,17 @@ public class TestDataImporter {
             saveProfile(session, user11, "FName11", "LName11", LocalDate.of(2001, 5, 29));
             saveProfile(session, user12, "FName12", "LName12", LocalDate.of(2000, 2, 28));
 
-            Voucher voucher = saveVoucher(session, spainTouristAgency, user, "Voucher", 123.95, Type.THERAPY, null);
-            Voucher voucher1 = saveVoucher(session, greeceTouristAgency, user1, "Voucher1", 136.75, Type.SHOPPING, null);
-            Voucher voucher2 = saveVoucher(session, spainTouristAgency, user4, "Voucher2", 143.59, Type.THERAPY, null);
+            Voucher voucher = saveVoucher(session, greeceTouristAgency, user, "Voucher", 123.95, Type.THERAPY, null);
+            Voucher voucher1 = saveVoucher(session, spainTouristAgency, user1, "Voucher1", 136.75, Type.SHOPPING, null);
+            Voucher voucher2 = saveVoucher(session, greeceTouristAgency, user4, "Voucher2", 143.59, Type.THERAPY, null);
             Voucher voucher3 = saveVoucher(session, spainTouristAgency, user2, "Voucher3", 153.29, Type.SHOPPING, null);
-            Voucher voucher4 = saveVoucher(session, greeceTouristAgency, user11, "Voucher4", 167.49, Type.EXCURSION, null);
-            Voucher voucher5 = saveVoucher(session, spainTouristAgency, user10, "Voucher5", 173.46, Type.CRUISE, null);
-            Voucher voucher6 = saveVoucher(session, belarusTouristAgency, user5, "Voucher6", 183.15, Type.REST, null);
-            Voucher voucher7 = saveVoucher(session, brazilTouristAgency, user4, "Voucher7", 199.25, Type.THERAPY, null);
-            Voucher voucher8 = saveVoucher(session, spainTouristAgency, user3, "Voucher8", 131.35, Type.EXCURSION, null);
-            Voucher voucher9 = saveVoucher(session, brazilTouristAgency, user12, "Voucher9", 143.55, Type.THERAPY, null);
-            Voucher voucher10 = saveVoucher(session, belarusTouristAgency, user, "Voucher10", 123.45, Type.REST, null);
+            Voucher voucher4 = saveVoucher(session, brazilTouristAgency, user11, "Voucher4", 167.49, Type.EXCURSION, null);
+            Voucher voucher5 = saveVoucher(session, belarusTouristAgency, user10, "Voucher5", 173.46, Type.CRUISE, null);
+            Voucher voucher6 = saveVoucher(session, spainTouristAgency, user5, "Voucher6", 183.15, Type.REST, null);
+            Voucher voucher7 = saveVoucher(session, belarusTouristAgency, user4, "Voucher7", 199.25, Type.THERAPY, null);
+            Voucher voucher8 = saveVoucher(session, greeceTouristAgency, user3, "Voucher8", 131.35, Type.EXCURSION, null);
+            Voucher voucher9 = saveVoucher(session, spainTouristAgency, user12, "Voucher9", 143.55, Type.THERAPY, null);
+            Voucher voucher10 = saveVoucher(session, brazilTouristAgency, user, "Voucher10", 123.45, Type.REST, null);
 
             saveVoucherInfo(session, voucher, Country.PL, LocalDate.of(2023, 8, 22), LocalDate.of(2023, 8, 30), Transport.BUS, Food.AI);
             saveVoucherInfo(session, voucher1, Country.BY, LocalDate.of(2023, 9, 22), LocalDate.of(2023, 9, 30), Transport.PLANE,  Food.EP);
