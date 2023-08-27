@@ -1,6 +1,6 @@
 package by.travel.touristagency.servlet;
 
-import by.travel.touristagency.service.CompanyService;
+import by.travel.touristagency.service.VoucherService;
 import by.travel.touristagency.util.HibernateSessionFactoryUtil;
 import by.travel.touristagency.util.JSPHelper;
 import jakarta.servlet.ServletConfig;
@@ -13,9 +13,9 @@ import org.hibernate.SessionFactory;
 
 import java.io.IOException;
 
-@WebServlet( value = "/travel_by")
-public class MainServlet extends HttpServlet {
-    private final CompanyService companyService = CompanyService.getInstance();
+@WebServlet("/vouchers")
+public class VoucherServlet extends HttpServlet {
+    private final VoucherService voucherService = VoucherService.getInstance();
     private SessionFactory sessionFactory;
 
     @Override
@@ -27,8 +27,10 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("companies", companyService.getAllCompanies(sessionFactory));
-        req.getRequestDispatcher(JSPHelper.get("main"))
+        Long companyId = Long.valueOf(req.getParameter("companyId"));
+        req.setAttribute("vouchers", voucherService.getVouchersByCompanyId(companyId, sessionFactory));
+
+        req.getRequestDispatcher(JSPHelper.get("vouchers"))
                 .forward(req, resp);
     }
 }

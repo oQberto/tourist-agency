@@ -29,5 +29,14 @@
         <button type="button">Login</button>
     </a>
 </div>
+<div>
+    <div>
+        <ul>
+            <c:forEach var="company" items="${requestScope.companies}">
+                <a href="${pageContext.request.contextPath}/vouchers?companyId=${company.id}">${company.name}</a><br>
+            </c:forEach>
+        </ul>
+    </div>
+</div>
 </body>
 </html>
