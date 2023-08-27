@@ -6,7 +6,6 @@ import by.travel.touristagency.entity.User;
 import by.travel.touristagency.mapper.CreateUserMapper;
 import by.travel.touristagency.mapper.UserMapper;
 import by.travel.touristagency.repository.UserRepository;
-import by.travel.touristagency.util.HibernateSessionFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -18,9 +17,8 @@ public class UserService {
     private final UserMapper userMapper = UserMapper.getInstance();
     private final UserRepository userRepository = new UserRepository(null);
 
-    public void createUser(CreateUserDto createUserDto) {
-        try (SessionFactory sessionFactory = HibernateSessionFactoryUtil.getInstance().buildSessionFactory();
-             Session session = sessionFactory.openSession()) {
+    public void createUser(CreateUserDto createUserDto, SessionFactory sessionFactory) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             userRepository.setEntityManager(session);
 
@@ -31,11 +29,10 @@ public class UserService {
         }
     }
 
-    public Optional<UserDto> login(String email, String password) {
+    public Optional<UserDto> login(String email, String password, SessionFactory sessionFactory) {
         Optional<UserDto> userDto;
 
-        try (SessionFactory sessionFactory = HibernateSessionFactoryUtil.getInstance().buildSessionFactory();
-             Session session = sessionFactory.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             userRepository.setEntityManager(session);
 
