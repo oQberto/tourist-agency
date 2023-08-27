@@ -14,13 +14,13 @@
 <body>
 <form action="${pageContext.request.contextPath}/registration" method="post">
     <label for="userName">User name:
-        <input type="text" name="userName" id="userName">
+        <input type="text" name="userName" id="userName" required>
     </label><br>
     <label for="email">Email:
-        <input type="text" name="email" id="email">
+        <input type="text" name="email" id="email" required>
     </label><br>
     <label for="password">Password:
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" required>
     </label><br>
     <button type="submit">Send</button>
     <c:if test="${not empty requestScope.errors}">
