@@ -7,18 +7,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Login</title>
-    <style>
-        <%@include file="/css/login.css" %>
-    </style>
+    <title>Travel.by Login</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/image/logo_title.webp" type="image/x-icon">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" type="text/css">
 </head>
 <body>
 <header class="header">
     <div class="logo_div">
-        <img src='<c:url value="/image/airplane-around-earth.webp"/>' alt="travel">
+        <img src='<c:url value="/image/logo.webp"/>' alt="travel">
         <a href="${pageContext.request.contextPath}/travel_by" class="logo">Travel.by</a>
     </div>
 

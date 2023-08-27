@@ -10,14 +10,13 @@
 <html>
 <head>
     <title>Travel.by</title>
-    <style>
-        <%@include file="/css/home_page.css" %>
-    </style>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/image/logo_title.webp" type="image/x-icon">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home_page.css" type="text/css">
 </head>
 <body>
 <header class="header">
     <div class="logo_div">
-        <img src='<c:url value="/image/airplane-around-earth.webp"/>' alt="travel">
+        <img src='<c:url value="/image/logo.webp"/>' alt="travel">
         <a href="#" class="logo">Travel.by</a>
     </div>
     <nav class="navbar">
