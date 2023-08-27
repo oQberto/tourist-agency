@@ -47,6 +47,16 @@ class VoucherRepositoryTest {
     }
 
     @Test
+    void shouldFindAllVouchers() {
+        session.beginTransaction();
+
+        List<Voucher> actualResult = voucherRepository.getAllVouchers();
+        assertThat(actualResult).hasSize(11);
+
+        session.getTransaction().commit();
+    }
+
+    @Test
     void shouldFindVoucherById() {
         session.beginTransaction();
 
