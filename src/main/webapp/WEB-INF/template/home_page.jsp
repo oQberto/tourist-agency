@@ -24,10 +24,13 @@
         <c:if test="${empty sessionScope.user}">
             <a href="${pageContext.request.contextPath}/login">Login</a>
         </c:if>
+        <a href="${pageContext.request.contextPath}/post_voucher">Post a voucher</a>
+        <c:if test="${not empty sessionScope.user}">
+            <a href="${pageContext.request.contextPath}/profile">Profile</a>
+        </c:if>
         <c:if test="${not empty sessionScope.user}">
             <a href="${pageContext.request.contextPath}/logout">Logout</a>
         </c:if>
-        <a href="#">Post a voucher</a>
         <a href="#">Contact</a>
     </nav>
 </header>
