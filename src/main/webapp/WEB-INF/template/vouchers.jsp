@@ -12,6 +12,8 @@
     <title>Vouchers</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/image/logo_title.webp" type="image/x-icon">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vouchers.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css" type="text/css">
 </head>
 <body>
 <header class="header">
