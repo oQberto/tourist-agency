@@ -39,6 +39,9 @@ public class Voucher {
     @Enumerated(STRING)
     private Type type;
 
+    @Column(name = "image")
+    private String image;
+
     @Column(name = "description")
     private String description;
 

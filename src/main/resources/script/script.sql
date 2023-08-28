@@ -71,6 +71,12 @@ CREATE TABLE voucher
     description VARCHAR(256)
 );
 
+ALTER TABLE voucher
+ADD COLUMN intro_img VARCHAR(128);
+
+ALTER TABLE voucher
+RENAME COLUMN intro_img TO image;
+
 INSERT INTO voucher(company_id, user_id, name, price, type, description)
 VALUES (1, 6, 'Voucher1', 123.25, 'THERAPY', null),
        (2, 7, 'Voucher2', 193.25, 'SHOPPING', null),
