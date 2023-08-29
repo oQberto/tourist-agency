@@ -11,7 +11,7 @@
 <head>
     <title>Travel.by</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/image/logo_title.webp" type="image/x-icon">
-    <link rel="stylesheet" href="/css/home_page.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home_page.css" type="text/css">
 </head>
 <body>
 
