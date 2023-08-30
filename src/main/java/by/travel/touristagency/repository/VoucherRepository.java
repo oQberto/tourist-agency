@@ -6,7 +6,7 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberTemplate;
 import com.querydsl.jpa.impl.JPAQuery;
-import jakarta.persistence.EntityManager;
+import org.hibernate.Session;
 import org.hibernate.query.SortDirection;
 
 import java.util.List;
@@ -15,14 +15,14 @@ import static by.travel.touristagency.entity.QVoucher.voucher;
 
 public class VoucherRepository extends BaseRepository<Long, Voucher> {
 
-    public VoucherRepository(EntityManager entityManager) {
-        super(Voucher.class, entityManager);
+    public VoucherRepository(Session session) {
+        super(Voucher.class, session);
     }
 
     public List<Voucher> getFilteredVoucher(VoucherFilter filter) {
         Predicate predicate = buildPredicate(filter);
 
-        return new JPAQuery<Voucher>(getEntityManager())
+        return new JPAQuery<Voucher>(getSession())
                 .select(voucher)
                 .from(voucher)
                 .where(predicate)
@@ -30,7 +30,7 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
     }
 
     public List<Voucher> getVouchersByCompanyId(Long companyId) {
-        return new JPAQuery<Voucher>(getEntityManager())
+        return new JPAQuery<Voucher>(getSession())
                 .select(voucher)
                 .from(voucher)
                 .where(voucher.company.id.eq(companyId))
@@ -45,7 +45,7 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
                 voucher.info.endAt
         );
 
-        return new JPAQuery<Voucher>(getEntityManager())
+        return new JPAQuery<Voucher>(getSession())
                 .select(voucher)
                 .from(voucher)
                 .where(expression.goe(amountOfDays))
@@ -53,7 +53,7 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
     }
 
     public List<Voucher> getVouchersSortedByPrice(SortDirection sortDirection, int limit) {
-        JPAQuery<Voucher> query = new JPAQuery<>(getEntityManager())
+        JPAQuery<Voucher> query = new JPAQuery<>(getSession())
                 .select(voucher)
                 .from(voucher);
 

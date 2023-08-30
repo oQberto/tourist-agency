@@ -1,11 +1,11 @@
 package by.travel.touristagency.repository;
 
 import by.travel.touristagency.entity.VoucherInfo;
-import jakarta.persistence.EntityManager;
+import org.hibernate.Session;
 
 public class VoucherInfoRepository extends BaseRepository<Long, VoucherInfo> {
 
-    public VoucherInfoRepository(EntityManager entityManager) {
-        super(VoucherInfo.class, entityManager);
+    public VoucherInfoRepository(Session session) {
+        super(VoucherInfo.class, session);
     }
 }
