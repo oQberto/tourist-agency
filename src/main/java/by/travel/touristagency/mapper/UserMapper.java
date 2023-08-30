@@ -13,6 +13,7 @@ public class UserMapper implements Mapper<User, UserDto> {
     @Override
     public UserDto map(User object) {
         return UserDto.builder()
+                .id(object.getId())
                 .username(object.getUsername())
                 .email(object.getEmail())
                 .password(object.getPassword())
