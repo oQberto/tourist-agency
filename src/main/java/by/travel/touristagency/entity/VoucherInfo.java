@@ -33,16 +33,17 @@ public class VoucherInfo {
     @Enumerated(STRING)
     private Country country;
 
-    @Column(name = "start_on")
-    private LocalDate startOn;
+    @Column(name = "start_at")
+    private LocalDate startAt;
 
-    @Column(name = "end_on")
-    private LocalDate endOn;
+    @Column(name = "end_at")
+    private LocalDate endAt;
 
     @Column(name = "transport")
     @Enumerated(STRING)
     private Transport transport;
 
     @Column(name = "food")
+    @Enumerated(STRING)
     private Food food;
 }

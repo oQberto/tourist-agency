@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter({"/post_voucher", "/profile", "/book"})
+@WebFilter({"/post_voucher", "/profile"})
 public class AuthorizationFilter implements Filter {
 
     @Override

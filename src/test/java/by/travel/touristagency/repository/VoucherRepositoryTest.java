@@ -2,7 +2,6 @@ package by.travel.touristagency.repository;
 
 import by.travel.touristagency.dto.VoucherFilter;
 import by.travel.touristagency.entity.Company;
-import by.travel.touristagency.entity.User;
 import by.travel.touristagency.entity.Voucher;
 import by.travel.touristagency.entity.enums.Country;
 import by.travel.touristagency.entity.enums.Food;
@@ -78,7 +77,6 @@ class VoucherRepositoryTest {
         Optional<Voucher> actualResult = voucherRepository.findById(1L);
 
         assertThat(actualResult).isPresent();
-        assertThat(actualResult.get().getUser().getEmail()).isEqualTo("uname@gmail.com");
 
         session.getTransaction().commit();
     }
@@ -121,10 +119,8 @@ class VoucherRepositoryTest {
         Optional<Voucher> existingVoucher = voucherRepository.findById(1L);
         assertThat(existingVoucher).isPresent();
 
-        User user = existingVoucher.get().getUser();
         Company company = existingVoucher.get().getCompany();
         Voucher voucher = Voucher.builder()
-                .user(user)
                 .company(company)
                 .name("New Voucher")
                 .price(0.0)
@@ -135,7 +131,6 @@ class VoucherRepositoryTest {
 
         Optional<Voucher> actualResult = voucherRepository.findById(savedVoucher.getId());
         assertThat(actualResult).isPresent();
-        assertThat(actualResult.get().getUser().getEmail()).isEqualTo("uname@gmail.com");
 
         session.getTransaction().rollback();
     }

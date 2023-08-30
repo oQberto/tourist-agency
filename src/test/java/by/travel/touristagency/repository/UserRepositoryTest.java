@@ -87,7 +87,6 @@ class UserRepositoryTest {
                 .username("Name")
                 .password("456")
                 .email("name@mail.com")
-                .company(userRepository.findById(1L).get().getCompany())
                 .build();
 
         User savedUser = userRepository.save(user);

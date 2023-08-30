@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static jakarta.persistence.CascadeType.ALL;
-import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(exclude = {"vouchers", "company", "profile"})
+@ToString(exclude = {"profile", "bookings"})
 @Entity
 @Table(name = "users", schema = "public")
 public class User {
@@ -32,10 +31,6 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "company_id")
-    private Company company;
-
     @OneToOne(
             mappedBy = "user",
             cascade = ALL,
@@ -43,7 +38,11 @@ public class User {
     )
     private Profile profile;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(
+            mappedBy = "user",
+            orphanRemoval = true,
+            cascade = ALL
+    )
     @Builder.Default
-    private List<Voucher> vouchers = new ArrayList<>();
+    private List<Booking> bookings = new ArrayList<>();
 }

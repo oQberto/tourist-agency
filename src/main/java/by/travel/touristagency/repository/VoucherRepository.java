@@ -41,8 +41,8 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
         NumberTemplate<Integer> expression = Expressions.numberTemplate(
                 Integer.class,
                 "timestampdiff(day, {0}, {1})",
-                voucher.info.startOn,
-                voucher.info.endOn
+                voucher.info.startAt,
+                voucher.info.endAt
         );
 
         return new JPAQuery<Voucher>(getEntityManager())

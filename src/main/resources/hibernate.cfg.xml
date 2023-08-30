@@ -20,6 +20,7 @@
         <mapping class="by.travel.touristagency.entity.Company"/>
         <mapping class="by.travel.touristagency.entity.Voucher"/>
         <mapping class="by.travel.touristagency.entity.VoucherInfo"/>
+        <mapping class="by.travel.touristagency.entity.Booking"/>
 
     </session-factory>
 </hibernate-configuration>

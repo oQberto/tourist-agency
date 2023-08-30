@@ -13,7 +13,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(exclude = {"users", "vouchers"})
+@ToString(exclude = {"vouchers"})
 @Entity
 public class Company {
 
@@ -34,8 +34,4 @@ public class Company {
     )
     @Builder.Default
     private List<Voucher> vouchers = new ArrayList<>();
-
-    @OneToMany(mappedBy = "company")
-    @Builder.Default
-    private List<User> users = new ArrayList<>();
 }

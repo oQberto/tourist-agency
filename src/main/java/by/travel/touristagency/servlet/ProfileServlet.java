@@ -1,5 +1,6 @@
 package by.travel.touristagency.servlet;
 
+import by.travel.touristagency.dto.CreateUserDto;
 import by.travel.touristagency.util.HibernateSessionFactoryUtil;
 import by.travel.touristagency.util.JSPHelper;
 import jakarta.servlet.ServletConfig;
@@ -12,8 +13,8 @@ import org.hibernate.SessionFactory;
 
 import java.io.IOException;
 
-@WebServlet("/book")
-public class BookingServlet extends HttpServlet {
+@WebServlet("/profile")
+public class ProfileServlet extends HttpServlet {
     private SessionFactory sessionFactory;
 
     @Override
@@ -25,12 +26,16 @@ public class BookingServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(JSPHelper.get("booking"))
+        req.getRequestDispatcher(JSPHelper.get("profile"))
                 .forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        CreateUserDto updatedUserData = CreateUserDto.builder()
+                .password(req.getParameter("password"))
+                .username(req.getParameter("username"))
+                .email(req.getParameter("email"))
+                .build();
     }
 }

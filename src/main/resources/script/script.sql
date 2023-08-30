@@ -12,22 +12,23 @@ DROP TABLE voucher;
 
 DROP TABLE voucher_info;
 
+DROP TABLE booking;
+
 -- Create and insert queries
 CREATE TABLE users
 (
-    id         BIGSERIAL PRIMARY KEY,
-    username   VARCHAR(256) NOT NULL,
-    password   VARCHAR(256) NOT NULL,
-    email      VARCHAR(256) NOT NULL UNIQUE,
-    company_id BIGINT REFERENCES company (id)
+    id       BIGSERIAL PRIMARY KEY,
+    username VARCHAR(256) NOT NULL,
+    password VARCHAR(256) NOT NULL,
+    email    VARCHAR(256) NOT NULL UNIQUE
 );
 
-INSERT INTO users (username, password, email, company_id)
-VALUES ('UName1', '123', 'name1@mail.com', 3),
-       ('UName2', '123', 'name2@mail.com', 2),
-       ('UName3', '123', 'name3@mail.com', 3),
-       ('UName4', '123', 'name4@mail.com', 4),
-       ('UName5', '123', 'name5@mail.com', 1);
+INSERT INTO users (username, password, email)
+VALUES ('UName1', '123', 'name1@mail.com'),
+       ('UName2', '123', 'name2@mail.com'),
+       ('UName3', '123', 'name3@mail.com'),
+       ('UName4', '123', 'name4@mail.com'),
+       ('UName5', '123', 'name5@mail.com');
 
 CREATE TABLE profile
 (
@@ -35,7 +36,7 @@ CREATE TABLE profile
     user_id    BIGINT REFERENCES users (id) ON DELETE CASCADE,
     first_name VARCHAR(128),
     last_name  VARCHAR(128),
-    birthday   TIMESTAMP
+    birthday   DATE
 );
 
 INSERT INTO profile(user_id, first_name, last_name, birthday)
@@ -47,12 +48,13 @@ VALUES (6, 'FName1', 'LName1', '1999-11-05'),
 
 CREATE TABLE company
 (
-    id   BIGSERIAL PRIMARY KEY,
-    name VARCHAR(128) NOT NULL
+    id            BIGSERIAL PRIMARY KEY,
+    name          VARCHAR(128) NOT NULL,
+    company_image VARCHAR(128)
 );
 
 ALTER TABLE company
-ADD COLUMN company_image VARCHAR(128);
+    ADD COLUMN company_image VARCHAR(128);
 
 INSERT INTO company(name)
 VALUES ('Company1'),
@@ -64,51 +66,54 @@ CREATE TABLE voucher
 (
     id          BIGSERIAL PRIMARY KEY,
     company_id  BIGINT REFERENCES company (id) ON DELETE CASCADE,
-    user_id     BIGINT REFERENCES users (id),
     name        VARCHAR(64) NOT NULL,
-    price       NUMERIC     NOT NULL CHECK (price > 0),
+    price       FLOAT       NOT NULL CHECK (price > 0),
     type        VARCHAR(32),
-    description VARCHAR(256)
+    description VARCHAR(256),
+    image       VARCHAR(256)
 );
 
-ALTER TABLE voucher
-ADD COLUMN intro_img VARCHAR(128);
-
-ALTER TABLE voucher
-RENAME COLUMN intro_img TO image;
-
-INSERT INTO voucher(company_id, user_id, name, price, type, description)
-VALUES (1, 6, 'Voucher1', 123.25, 'THERAPY', null),
-       (2, 7, 'Voucher2', 193.25, 'SHOPPING', null),
-       (3, 8, 'Voucher3', 143.25, 'CRUISE', null),
-       (2, 9, 'Voucher4', 113.25, 'SHOPPING', null),
-       (3, 6, 'Voucher5', 173.25, 'CRUISE', null),
-       (4, 10, 'Voucher6', 153.25, 'EXCURSION', null),
-       (1, 8, 'Voucher7', 123.25, 'THERAPY', null),
-       (2, 7, 'Voucher8', 293.25, 'SHOPPING', null),
-       (1, 9, 'Voucher9', 143.25, 'CRUISE', null),
-       (3, 9, 'Voucher10', 113.25, 'SHOPPING', null),
-       (3, 6, 'Voucher11', 173.25, 'REST', null),
-       (4, 10, 'Voucher12', 153.25, 'EXCURSION', null),
-       (3, 9, 'Voucher13', 223.25, 'THERAPY', null),
-       (4, 8, 'Voucher14', 193.25, 'REST', null),
-       (3, 10, 'Voucher15', 143.25, 'CRUISE', null),
-       (4, 10, 'Voucher16', 313.25, 'REST', null),
-       (1, 6, 'Voucher17', 173.25, 'REST', null),
-       (3, 7, 'Voucher18', 153.25, 'EXCURSION', null);
+INSERT INTO voucher(company_id, name, price, type, description)
+VALUES (1, 'Voucher1', 123.25, 'THERAPY', null),
+       (2, 'Voucher2', 193.25, 'SHOPPING', null),
+       (3, 'Voucher3', 143.25, 'CRUISE', null),
+       (2, 'Voucher4', 113.25, 'SHOPPING', null),
+       (3, 'Voucher5', 173.25, 'CRUISE', null),
+       (4, 'Voucher6', 153.25, 'EXCURSION', null),
+       (1, 'Voucher7', 123.25, 'THERAPY', null),
+       (2, 'Voucher8', 293.25, 'SHOPPING', null),
+       (1, 'Voucher9', 143.25, 'CRUISE', null),
+       (3, 'Voucher10', 113.25, 'SHOPPING', null),
+       (3, 'Voucher11', 173.25, 'REST', null),
+       (4, 'Voucher12', 153.25, 'EXCURSION', null),
+       (3, 'Voucher13', 223.25, 'THERAPY', null),
+       (4, 'Voucher14', 193.25, 'REST', null),
+       (3, 'Voucher15', 143.25, 'CRUISE', null),
+       (4, 'Voucher16', 313.25, 'REST', null),
+       (1, 'Voucher17', 173.25, 'REST', null),
+       (3, 'Voucher18', 153.25, 'EXCURSION', null);
 
 CREATE TABLE voucher_info
 (
     id         BIGSERIAL PRIMARY KEY,
     voucher_id BIGINT REFERENCES voucher (id) ON DELETE CASCADE,
     country    VARCHAR(32) NOT NULL,
-    start_on   TIMESTAMP   NOT NULL,
-    end_on     TIMESTAMP   NOT NULL,
+    start_at   DATE        NOT NULL,
+    end_at     date        NOT NULL,
     transport  VARCHAR(32) NOT NULL,
-    food       BOOLEAN     NOT NULL
+    food       VARCHAR(64) NOT NULL
 );
 
-INSERT INTO voucher_info(voucher_id, country, start_on, end_on, transport, food)
+ALTER TABLE voucher_info
+    ALTER COLUMN end_at TYPE DATE;
+
+ALTER TABLE voucher_info
+    ALTER COLUMN start_at TYPE DATE;
+
+ALTER TABLE profile
+    ALTER COLUMN birthday TYPE DATE;
+
+INSERT INTO voucher_info(voucher_id, country, start_at, end_at, transport, food)
 VALUES (1, 'BY', '2023-08-22', '2023-08-30', 'BUS', true),
        (2, 'UK', '2023-09-22', '2023-09-30', 'BUS', false),
        (3, 'USA', '2023-09-10', '2023-09-16', 'PLANE', true),
@@ -129,7 +134,16 @@ VALUES (1, 'BY', '2023-08-22', '2023-08-30', 'BUS', true),
        (18, 'USA', '2023-11-01', '2023-11-08', 'PLANE', false);
 
 ALTER TABLE voucher_info
-ALTER COLUMN food TYPE VARCHAR(32);
+    ALTER COLUMN food TYPE VARCHAR(32);
+
+
+CREATE TABLE booking
+(
+    id         BIGSERIAL PRIMARY KEY,
+    user_id    BIGINT REFERENCES users (id) ON DELETE CASCADE,
+    voucher_id BIGINT REFERENCES voucher ON DELETE CASCADE
+);
+
 
 -- Select queries
 -- 1. Select voucher by transport
@@ -139,8 +153,8 @@ SELECT v.id,
        v.type,
        v.description,
        i.country,
-       i.start_on,
-       i.end_on,
+       i.start_at,
+       i.end_at,
        i.transport,
        i.food
 FROM voucher_info i
@@ -154,8 +168,8 @@ SELECT v.id,
        v.type,
        v.description,
        i.country,
-       i.start_on,
-       i.end_on,
+       i.start_at,
+       i.end_at,
        i.transport,
        i.food
 FROM voucher v
@@ -169,13 +183,13 @@ SELECT v.id,
        v.type,
        v.description,
        i.country,
-       i.start_on,
-       i.end_on,
+       i.start_at,
+       i.end_at,
        i.transport,
        i.food
 FROM voucher v
          LEFT JOIN voucher_info i ON v.id = i.id
-WHERE dateDiff(i.end_on, i.start_on) >= 10;
+WHERE dateDiff(i.end_at, i.start_at) >= 10;
 
 -- 4. Select by voucher type
 SELECT v.id,
@@ -184,15 +198,16 @@ SELECT v.id,
        v.type,
        v.description,
        i.country,
-       i.start_on,
-       i.end_on,
+       i.start_at,
+       i.end_at,
        i.transport,
        i.food
 FROM voucher v
          LEFT JOIN voucher_info i ON v.id = i.id
 WHERE v.type = 'SHOPPING'
-   AND v.price >= 125.0 AND v.price <= 139.0
-AND i.transport = 'PLANE';
+  AND v.price >= 125.0
+  AND v.price <= 139.0
+  AND i.transport = 'PLANE';
 
 -- 5. Select by company
 SELECT v.id,
@@ -201,8 +216,8 @@ SELECT v.id,
        v.type,
        v.description,
        i.country,
-       i.start_on,
-       i.end_on,
+       i.start_at,
+       i.end_at,
        i.transport,
        i.food
 FROM voucher v
@@ -217,8 +232,8 @@ SELECT v.id,
        v.type,
        v.description,
        i.country,
-       i.start_on,
-       i.end_on,
+       i.start_at,
+       i.end_at,
        i.transport,
        i.food
 FROM voucher v
@@ -233,8 +248,8 @@ SELECT v.id,
        v.type,
        v.description,
        i.country,
-       i.start_on,
-       i.end_on,
+       i.start_at,
+       i.end_at,
        i.transport,
        i.food
 FROM voucher v
@@ -250,8 +265,8 @@ SELECT v.id,
        v.type,
        v.description,
        i.country,
-       i.start_on,
-       i.end_on,
+       i.start_at,
+       i.end_at,
        i.transport,
        i.food
 FROM voucher v
@@ -266,13 +281,13 @@ SELECT v.id,
        v.type,
        v.description,
        i.country,
-       i.start_on,
-       i.end_on,
+       i.start_at,
+       i.end_at,
        i.transport,
        i.food
 FROM voucher v
          LEFT JOIN voucher_info i ON v.id = i.id
-ORDER BY dateDiff(i.end_on, i.start_on);
+ORDER BY dateDiff(i.end_at, i.start_at);
 
 -- 3. Sort vouchers by food
 SELECT v.id,
@@ -281,8 +296,8 @@ SELECT v.id,
        v.type,
        v.description,
        i.country,
-       i.start_on,
-       i.end_on,
+       i.start_at,
+       i.end_at,
        i.transport,
        i.food
 FROM voucher v
@@ -292,8 +307,8 @@ ORDER BY i.food DESC;
 
 -- Delete operations
 -- If a user delete, profile should delete too.
-INSERT INTO users(username, password, email, company_id)
-VALUES ('UName6', 123, 'name6@gmail.com', 2);
+INSERT INTO users(username, password, email)
+VALUES ('UName6', 123, 'name6@gmail.com');
 
 INSERT INTO profile(user_id, first_name, last_name, birthday)
 VALUES (11, 'FName6', 'LName6', '2003-05-16');
@@ -306,19 +321,19 @@ WHERE id = 11;
 INSERT INTO company(name)
 VALUES ('Company5');
 
-INSERT INTO voucher(company_id, user_id, name, price, type, description)
-VALUES (5, 6, 'Voucher19', 45.23, 'REST', null),
-       (5, 6, 'Voucher19', 45.23, 'REST', null);
+INSERT INTO voucher(company_id, name, price, type, description)
+VALUES (5, 'Voucher19', 45.23, 'REST', null),
+       (5, 'Voucher19', 45.23, 'REST', null);
 
 DELETE
 FROM company
 WHERE id = 5;
 
 -- If a voucher delete, the voucher_info should delete too.
-INSERT INTO voucher(company_id, user_id, name, price, type, description)
-VALUES (4, 6, 'VoucherTest', 45.23, 'REST', null);
+INSERT INTO voucher(company_id, name, price, type, description)
+VALUES (4, 'VoucherTest', 45.23, 'REST', null);
 
-INSERT INTO voucher_info(voucher_id, country, start_on, end_on, transport, food)
+INSERT INTO voucher_info(voucher_id, country, start_at, end_at, transport, food)
 VALUES (21, 'PL', '2000-02-02', '2000-03-02', 'BUS', true);
 
 DELETE
@@ -328,10 +343,11 @@ WHERE id = 21;
 
 -- Functions
 
-CREATE OR REPLACE FUNCTION dateDiff(endsAt TIMESTAMP, startsAt TIMESTAMP) RETURNS integer AS $$
+CREATE OR REPLACE FUNCTION dateDiff(endsAt TIMESTAMP, startsAt TIMESTAMP) RETURNS integer AS
+$$
 BEGIN
     RETURN DATE_PART('day', endsAt - startsAt);
 END;
 $$ LANGUAGE plpgsql;
 
-DROP FUNCTION  dateDiff(endsAt TIMESTAMP, startsAt TIMESTAMP);
+DROP FUNCTION dateDiff(endsAt TIMESTAMP, startsAt TIMESTAMP);

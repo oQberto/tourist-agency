@@ -1,9 +1,12 @@
 package by.travel.touristagency.service;
 
 import by.travel.touristagency.dto.CreateUserDto;
+import by.travel.touristagency.dto.ProfileDto;
 import by.travel.touristagency.dto.UserDto;
+import by.travel.touristagency.entity.Profile;
 import by.travel.touristagency.entity.User;
 import by.travel.touristagency.mapper.CreateUserMapper;
+import by.travel.touristagency.mapper.ProfileMapper;
 import by.travel.touristagency.mapper.UserMapper;
 import by.travel.touristagency.repository.UserRepository;
 import org.hibernate.Session;
@@ -14,6 +17,7 @@ import java.util.Optional;
 public class UserService {
     private static final UserService INSTANCE = new UserService();
     private final CreateUserMapper createUserMapper = CreateUserMapper.getInstance();
+    private final ProfileMapper profileMapper = ProfileMapper.getInstance();
     private final UserMapper userMapper = UserMapper.getInstance();
     private final UserRepository userRepository = new UserRepository(null);
 
@@ -43,6 +47,18 @@ public class UserService {
         }
 
         return userDto;
+    }
+
+    public void updateUserProfile(ProfileDto profileDto, UserDto userDto, SessionFactory sessionFactory) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Profile profile = profileMapper.map(profileDto);
+            User user = userMapper.map(userDto);
+
+
+        }
+
+
     }
 
     public static UserService getInstance() {
