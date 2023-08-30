@@ -20,14 +20,6 @@ public class UserMapper implements Mapper<User, UserDto> {
                 .build();
     }
 
-    public User map(UserDto object) {
-        return User.builder()
-                .username(object.getUsername())
-                .email(object.getEmail())
-                .password(object.getPassword())
-                .build();
-    }
-
     public static UserMapper getInstance() {
         return INSTANCE;
     }

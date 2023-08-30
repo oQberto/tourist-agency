@@ -1,6 +1,6 @@
 package by.travel.touristagency.servlet;
 
-import by.travel.touristagency.dto.CreateUserDto;
+import by.travel.touristagency.dto.UserDto;
 import by.travel.touristagency.service.UserService;
 import by.travel.touristagency.util.HibernateSessionFactoryUtil;
 import jakarta.servlet.ServletConfig;
@@ -27,13 +27,13 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CreateUserDto createUserDto = CreateUserDto.builder()
+        UserDto userDto = UserDto.builder()
                 .username(req.getParameter("userName"))
                 .password(req.getParameter("password"))
                 .email(req.getParameter("email"))
                 .build();
 
-        userService.createUser(createUserDto, sessionFactory);
+        userService.createUser(userDto, sessionFactory);
         resp.sendRedirect("/travel_by");
     }
 }

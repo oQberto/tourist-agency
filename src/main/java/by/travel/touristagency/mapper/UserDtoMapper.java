@@ -1,25 +1,26 @@
 package by.travel.touristagency.mapper;
 
-import by.travel.touristagency.dto.CreateUserDto;
+import by.travel.touristagency.dto.UserDto;
 import by.travel.touristagency.entity.User;
 import lombok.NoArgsConstructor;
 
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
-public class CreateUserMapper implements Mapper<CreateUserDto, User> {
-    private static final CreateUserMapper INSTANCE = new CreateUserMapper();
+public class UserDtoMapper implements Mapper<UserDto, User> {
+    private static final UserDtoMapper INSTANCE = new UserDtoMapper();
 
     @Override
-    public User map(CreateUserDto object) {
+    public User map(UserDto object) {
         return User.builder()
+                .id(object.getId())
                 .username(object.getUsername())
-                .password(object.getPassword())
                 .email(object.getEmail())
+                .password(object.getPassword())
                 .build();
     }
 
-    public static CreateUserMapper getInstance() {
+    public static UserDtoMapper getInstance() {
         return INSTANCE;
     }
 }
