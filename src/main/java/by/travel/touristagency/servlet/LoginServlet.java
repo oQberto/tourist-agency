@@ -1,6 +1,8 @@
 package by.travel.touristagency.servlet;
 
 import by.travel.touristagency.dto.UserDto;
+import by.travel.touristagency.entity.Profile;
+import by.travel.touristagency.service.ProfileService;
 import by.travel.touristagency.service.UserService;
 import by.travel.touristagency.util.HibernateSessionFactoryUtil;
 import by.travel.touristagency.util.JSPHelper;
@@ -18,6 +20,7 @@ import java.io.IOException;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
     private final UserService userService = UserService.getInstance();
+    private final ProfileService profileService = ProfileService.getInstance();
     private SessionFactory sessionFactory;
 
     @Override
@@ -34,7 +37,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         userService.login(email, password, sessionFactory)
@@ -51,8 +54,13 @@ public class LoginServlet extends HttpServlet {
 
     @SneakyThrows
     private void onLoginSuccess(UserDto user, HttpServletRequest req, HttpServletResponse resp) {
+        Profile profile = profileService.getByUserId(user.getId(), sessionFactory);
+
         req.getSession().setAttribute("user", user);
+        req.getSession().setAttribute("profile", profile);
         req.getSession().setAttribute("userId", user.getId());
+        req.getSession().setAttribute("profileId", profile.getId());
+
         resp.sendRedirect("/travel_by");
     }
 }

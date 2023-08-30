@@ -7,8 +7,7 @@ import java.time.LocalDate;
 
 @Value
 @Builder
-public class ProfileDto {
-    Integer id;
+public class ProfileDto  {
     String firstName;
     String lastName;
     LocalDate birthday;

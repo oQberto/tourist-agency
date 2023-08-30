@@ -20,7 +20,7 @@ public class VoucherService {
 
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            voucherRepository.setEntityManager(session);
+            voucherRepository.setSession(session);
 
             vouchers = voucherRepository.getVouchersByCompanyId(id);
 

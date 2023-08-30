@@ -1,4 +1,4 @@
-<%--
+<%@ page import="by.travel.touristagency.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: ermak
   Date: 8/29/2023
@@ -27,6 +27,16 @@
         <a href="#">Contact</a>
     </nav>
 </header>
+
+<form action="${pageContext.request.contextPath}/profile" method="post">
+    <p><input type="text" name="password" id="password" value="${sessionScope.user.password}"></p><br>
+    <p><input type="text" name="email" id="email" value="${sessionScope.user.email}"></p><br>
+    <p><input type="text" name="username" id="username" value="${sessionScope.user.username}"></p><br>
+    <p><input type="text" name="firstName" id="firstName" value="${sessionScope.profile.firstName}"></p><br>
+    <p><input type="text" name="lastName" id="lastName" value="${sessionScope.profile.lastName}"></p><br>
+    <p><input type="text" name="birthday" id="birthday" value="${sessionScope.profile.birthday}"></p><br>
+    <button type="submit">Save</button>
+</form>
 
 <footer>
     <div class="footer-content">

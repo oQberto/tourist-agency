@@ -19,7 +19,7 @@ public class CompanyService {
         List<Company> companies;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            companyRepository.setEntityManager(session);
+            companyRepository.setSession(session);
 
             companies = companyRepository.getAll();
 
