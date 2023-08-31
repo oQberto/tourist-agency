@@ -27,7 +27,7 @@
         </c:if>
         <a href="${pageContext.request.contextPath}/post_voucher">Post a voucher</a>
         <c:if test="${not empty sessionScope.user}">
-            <a href="${pageContext.request.contextPath}/profile?profileId=${sessionScope.profileId}">Profile</a>
+            <a href="${pageContext.request.contextPath}/profile">Profile</a>
         </c:if>
         <c:if test="${not empty sessionScope.user}">
             <a href="${pageContext.request.contextPath}/logout">Logout</a>
