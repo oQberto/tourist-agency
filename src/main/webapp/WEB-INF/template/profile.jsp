@@ -10,13 +10,13 @@
 <html>
 <head>
     <title>Profile</title>
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/image/logo_title.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/image/logo/logo_title.webp" type="image/x-icon">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css" type="text/css">
 </head>
 <body>
 <header class="header">
     <div class="logo_div">
-        <img src='<c:url value="/image/logo.webp"/>' alt="travel">
+        <img src='<c:url value="/image/logo/logo.webp"/>' alt="travel">
         <a href="${pageContext.request.contextPath}/travel_by" class="logo">Travel.by</a>
     </div>
     <nav class="navbar">
@@ -74,9 +74,9 @@
         <h3>Travel.by</h3>
         <p>Thousands of tours and cruises for book across the World</p>
         <ul class="socials">
-            <li><a href="#"><img src='<c:url value="/image/facebook.webp"/>' alt="facebook"></a></li>
-            <li><a href="#"><img src='<c:url value="/image/github.webp"/>' alt="github"></a></li>
-            <li><a href="#"><img src='<c:url value="/image/linkedin.webp"/>' alt="linkedin"></a></li>
+            <li><a href="#"><img src='<c:url value="/image/icon/facebook.webp"/>' alt="facebook"></a></li>
+            <li><a href="#"><img src='<c:url value="/image/icon/github.webp"/>' alt="github"></a></li>
+            <li><a href="#"><img src='<c:url value="/image/icon/linkedin.webp"/>' alt="linkedin"></a></li>
         </ul>
     </div>
     <div class="footer-bottom">
