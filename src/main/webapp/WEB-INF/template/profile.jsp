@@ -27,16 +27,47 @@
         <a href="#">Contact</a>
     </nav>
 </header>
-
-<form action="${pageContext.request.contextPath}/profile" method="post">
-    <p><input type="text" name="password" id="password" value="${sessionScope.user.password}"></p><br>
-    <p><input type="text" name="email" id="email" value="${sessionScope.user.email}"></p><br>
-    <p><input type="text" name="username" id="username" value="${sessionScope.user.username}"></p><br>
-    <p><input type="text" name="firstName" id="firstName" value="${sessionScope.profile.firstName}"></p><br>
-    <p><input type="text" name="lastName" id="lastName" value="${sessionScope.profile.lastName}"></p><br>
-    <p><input type="text" name="birthday" id="birthday" value="${sessionScope.profile.birthday}"></p><br>
-    <button type="submit">Save</button>
-</form>
+<div class="wrapper">
+    <div class="form-box">
+        <h2>Profile</h2>
+        <form action="${pageContext.request.contextPath}/profile" method="post">
+            <div class="input-box">
+                <input type="text" name="username" id="username" value="${sessionScope.user.username}">
+                <label>Username</label>
+            </div>
+            <div class="input-box">
+                <input type="email" name="email" id="email" value="${sessionScope.user.email}">
+                <label>Email</label>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" id="password" value="${sessionScope.user.password}">
+                <label>Password</label>
+            </div>
+            <div class="input-box">
+                <input type="text" name="firstName" id="firstName" value="${sessionScope.profile.firstName}">
+                <label>First name</label>
+            </div>
+            <div class="input-box">
+                <input type="text" name="lastName" id="lastName" value="${sessionScope.profile.lastName}">
+                <label>Last name</label>
+            </div>
+            <div class="input-box">
+                <input type="text" name="birthday" id="birthday" value="${sessionScope.profile.birthday}">
+                <label>Birthday</label>
+            </div>
+            <button type="submit" class="btn">Save changes</button>
+        </form>
+    </div>
+</div>
+<%--<form action="${pageContext.request.contextPath}/profile" method="post">--%>
+<%--    <p><input type="text" name="password" id="password" value="${sessionScope.user.password}"></p><br>--%>
+<%--    <p><input type="text" name="email" id="email" value="${sessionScope.user.email}"></p><br>--%>
+<%--    <p><input type="text" name="username" id="username" value="${sessionScope.user.username}"></p><br>--%>
+<%--    <p><input type="text" name="firstName" id="firstName" value="${sessionScope.profile.firstName}"></p><br>--%>
+<%--    <p><input type="text" name="lastName" id="lastName" value="${sessionScope.profile.lastName}"></p><br>--%>
+<%--    <p><input type="text" name="birthday" id="birthday" value="${sessionScope.profile.birthday}"></p><br>--%>
+<%--    <button type="submit">Save</button>--%>
+<%--</form>--%>
 
 <footer>
     <div class="footer-content">
