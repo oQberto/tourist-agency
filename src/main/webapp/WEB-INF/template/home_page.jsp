@@ -56,7 +56,7 @@
 <div class="companies">
     <c:forEach var="company" items="${requestScope.companies}">
         <a href="${pageContext.request.contextPath}/vouchers?companyId=${company.id}">
-            <img src='<c:url value="/image/${company.image}"/>' alt="${company.name}">
+            <img src='<c:url value="/image/company_preview/${company.image}"/>' alt="${company.name}">
             <h3 class="company${company.id}">
                 <span>${company.name}</span>
             </h3>
