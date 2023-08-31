@@ -1,4 +1,4 @@
-package by.travel.touristagency.servlet;
+package by.travel.touristagency.controller;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

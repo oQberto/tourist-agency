@@ -1,4 +1,4 @@
-package by.travel.touristagency.servlet;
+package by.travel.touristagency.controller;
 
 import by.travel.touristagency.dto.UserDto;
 import by.travel.touristagency.service.UserService;
