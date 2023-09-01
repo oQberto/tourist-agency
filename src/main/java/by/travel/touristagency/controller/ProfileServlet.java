@@ -59,6 +59,9 @@ public class ProfileServlet extends HttpServlet {
         userService.updateUser(updatedUserData, sessionFactory);
         profileService.updateProfile(updatedProfileData, profileId, sessionFactory);
 
+        req.getSession().setAttribute("user", updatedUserData);
+        req.getSession().setAttribute("profile", updatedProfileData);
+
         resp.sendRedirect("/profile");
     }
 }
