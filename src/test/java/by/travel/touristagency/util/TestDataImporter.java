@@ -75,48 +75,48 @@ public class TestDataImporter {
             saveVoucherInfo(session, voucher9, Country.BY, LocalDate.of(2024, 4, 15), LocalDate.of(2024, 4, 30), Transport.BUS,  Food.AI);
             saveVoucherInfo(session, voucher10, Country.USA, LocalDate.of(2024, 6, 20), LocalDate.of(2024, 6, 28), Transport.PLANE,  Food.RO);
 
-            saveBooking(session, user, voucher9);
-            saveBooking(session, user1, voucher7);
-            saveBooking(session, user11, voucher8);
-            saveBooking(session, user10, voucher7);
-            saveBooking(session, user3, voucher6);
-            saveBooking(session, user1, voucher);
-            saveBooking(session, user2, voucher6);
-            saveBooking(session, user12, voucher);
-            saveBooking(session, user1, voucher4);
-            saveBooking(session, user12, voucher4);
-            saveBooking(session, user7, voucher8);
-            saveBooking(session, user7, voucher4);
-            saveBooking(session, user2, voucher);
-            saveBooking(session, user3, voucher3);
-            saveBooking(session, user1, voucher7);
-            saveBooking(session, user2, voucher6);
-            saveBooking(session, user2, voucher9);
-            saveBooking(session, user8, voucher10);
-            saveBooking(session, user2, voucher10);
-            saveBooking(session, user8, voucher);
-            saveBooking(session, user, voucher);
-            saveBooking(session, user, voucher7);
-            saveBooking(session, user4, voucher);
-            saveBooking(session, user4, voucher);
-            saveBooking(session, user12, voucher10);
-            saveBooking(session, user1, voucher5);
-            saveBooking(session, user2, voucher3);
-            saveBooking(session, user2, voucher9);
-            saveBooking(session, user, voucher5);
-            saveBooking(session, user12, voucher3);
-            saveBooking(session, user11, voucher10);
-            saveBooking(session, user9, voucher3);
-            saveBooking(session, user1, voucher);
-            saveBooking(session, user8, voucher2);
-            saveBooking(session, user, voucher5);
-            saveBooking(session, user10, voucher5);
-            saveBooking(session, user6, voucher4);
-            saveBooking(session, user9, voucher1);
-            saveBooking(session, user5, voucher2);
-            saveBooking(session, user11, voucher1);
-            saveBooking(session, user10, voucher2);
-            saveBooking(session, user11, voucher1);
+            saveBooking(session, 3, user, voucher9);
+            saveBooking(session, 1, user1, voucher7);
+            saveBooking(session, 3, user11, voucher8);
+            saveBooking(session, 1, user10, voucher7);
+            saveBooking(session, 4, user3, voucher6);
+            saveBooking(session, 1, user1, voucher);
+            saveBooking(session, 4, user2, voucher6);
+            saveBooking(session, 1, user12, voucher);
+            saveBooking(session, 3, user1, voucher4);
+            saveBooking(session, 1, user12, voucher4);
+            saveBooking(session, 1, user7, voucher8);
+            saveBooking(session, 1, user7, voucher4);
+            saveBooking(session, 3, user2, voucher);
+            saveBooking(session, 1, user3, voucher3);
+            saveBooking(session, 1, user1, voucher7);
+            saveBooking(session, 4, user2, voucher6);
+            saveBooking(session, 1, user2, voucher9);
+            saveBooking(session, 2, user8, voucher10);
+            saveBooking(session, 1, user2, voucher10);
+            saveBooking(session, 6, user8, voucher);
+            saveBooking(session, 1, user, voucher);
+            saveBooking(session, 1, user, voucher7);
+            saveBooking(session, 5, user4, voucher);
+            saveBooking(session, 1, user4, voucher);
+            saveBooking(session, 2, user12, voucher10);
+            saveBooking(session, 4, user1, voucher5);
+            saveBooking(session, 1, user2, voucher3);
+            saveBooking(session, 2, user2, voucher9);
+            saveBooking(session, 1, user, voucher5);
+            saveBooking(session, 1, user12, voucher3);
+            saveBooking(session, 4, user11, voucher10);
+            saveBooking(session, 1, user9, voucher3);
+            saveBooking(session, 3, user1, voucher);
+            saveBooking(session, 2, user8, voucher2);
+            saveBooking(session, 2, user, voucher5);
+            saveBooking(session, 3, user10, voucher5);
+            saveBooking(session, 1, user6, voucher4);
+            saveBooking(session, 2, user9, voucher1);
+            saveBooking(session, 1, user5, voucher2);
+            saveBooking(session, 1, user11, voucher1);
+            saveBooking(session, 3, user10, voucher2);
+            saveBooking(session, 4, user11, voucher1);
 
             session.getTransaction().commit();
         }
@@ -206,9 +206,11 @@ public class TestDataImporter {
     }
 
     private void saveBooking(Session session,
+                             Integer numberOfPersons,
                              User user,
                              Voucher voucher) {
         Booking booking = Booking.builder()
+                .numberOfPersons(numberOfPersons)
                 .user(user)
                 .voucher(voucher)
                 .build();

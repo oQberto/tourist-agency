@@ -19,6 +19,9 @@ public class Booking {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    @Column(name = "persons")
+    private Integer numberOfPersons;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

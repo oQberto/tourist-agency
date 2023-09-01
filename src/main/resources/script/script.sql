@@ -144,6 +144,9 @@ CREATE TABLE booking
     voucher_id BIGINT REFERENCES voucher ON DELETE CASCADE
 );
 
+ALTER TABLE booking
+    ADD COLUMN persons INT NOT NULL default 1;
+
 
 -- Select queries
 -- 1. Select voucher by transport
