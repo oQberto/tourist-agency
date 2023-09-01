@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 import static lombok.AccessLevel.PRIVATE;
 
@@ -21,8 +22,8 @@ public class VoucherService {
         List<Voucher> vouchers;
 
         try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
             voucherRepository = VoucherRepository.getInstance(session);
+            session.beginTransaction();
 
             vouchers = voucherRepository.getVouchersByCompanyId(id);
 
@@ -30,6 +31,21 @@ public class VoucherService {
         }
 
         return vouchers;
+    }
+
+    public Optional<Voucher> getVoucherById(Long id) {
+        Optional<Voucher> voucher;
+
+        try (Session session = sessionFactory.openSession()) {
+            voucherRepository = VoucherRepository.getInstance(session);
+            session.beginTransaction();
+
+            voucher = voucherRepository.findById(id);
+
+            session.getTransaction().commit();
+        }
+
+        return voucher;
     }
 
     public static VoucherService getInstance() {

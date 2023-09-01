@@ -19,8 +19,8 @@ public class ProfileService {
 
     public void updateProfile(ProfileDto profileDto, Long userId) {
         try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
             profileRepository = ProfileRepository.getInstance(session);
+            session.beginTransaction();
 
             Profile profile = profileRepository
                     .findById(userId)
@@ -41,8 +41,8 @@ public class ProfileService {
         Profile profile;
 
         try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
             profileRepository = ProfileRepository.getInstance(session);
+            session.beginTransaction();
 
             profile = profileRepository
                     .getProfileByUserId(userId)

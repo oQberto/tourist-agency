@@ -37,7 +37,7 @@ class VoucherRepositoryTest {
     @BeforeEach
     public void openSession() {
         session = SESSION_FACTORY.openSession();
-        voucherRepository = new VoucherRepository(session);
+        voucherRepository = VoucherRepository.getInstance(session);
     }
 
     @AfterEach

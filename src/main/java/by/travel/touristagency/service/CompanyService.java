@@ -18,8 +18,8 @@ public class CompanyService {
     public List<Company> getAllCompanies(SessionFactory sessionFactory) {
         List<Company> companies;
         try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
             companyRepository.setSession(session);
+            session.beginTransaction();
 
             companies = companyRepository.getAll();
 
