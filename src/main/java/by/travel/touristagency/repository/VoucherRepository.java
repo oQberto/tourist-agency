@@ -14,9 +14,10 @@ import java.util.List;
 import static by.travel.touristagency.entity.QVoucher.voucher;
 
 public class VoucherRepository extends BaseRepository<Long, Voucher> {
+    private static volatile VoucherRepository instance;
 
-    public VoucherRepository(Session session) {
-        super(Voucher.class, session);
+    public VoucherRepository(Class<Voucher> clazz, Session session) {
+        super(clazz, session);
     }
 
     public List<Voucher> getFilteredVoucher(VoucherFilter filter) {
@@ -77,5 +78,19 @@ public class VoucherRepository extends BaseRepository<Long, Voucher> {
                 .add(filter.getTransport(), voucher.info.transport::eq)
                 .add(filter.getFood(), voucher.info.food::eq)
                 .buildAnd();
+    }
+
+    public static VoucherRepository getInstance(Session session) {
+        VoucherRepository result = instance;
+        if (result != null) {
+            return result;
+        }
+
+        synchronized (VoucherRepository.class) {
+            if (instance == null) {
+                instance = new VoucherRepository(Voucher.class, session);
+            }
+            return instance;
+        }
     }
 }

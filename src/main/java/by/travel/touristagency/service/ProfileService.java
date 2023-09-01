@@ -3,6 +3,7 @@ package by.travel.touristagency.service;
 import by.travel.touristagency.dto.ProfileDto;
 import by.travel.touristagency.entity.Profile;
 import by.travel.touristagency.repository.ProfileRepository;
+import by.travel.touristagency.util.HibernateSessionFactoryUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
@@ -12,13 +13,14 @@ import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
 public class ProfileService {
-    private static final ProfileService INSTANCE = new ProfileService();
-    private final ProfileRepository profileRepository = new ProfileRepository(null);
+    private final SessionFactory sessionFactory = HibernateSessionFactoryUtil.getInstance().buildSessionFactory();
+    private static volatile ProfileService instance;
+    private  ProfileRepository profileRepository;
 
-    public void updateProfile(ProfileDto profileDto, Long userId, SessionFactory sessionFactory) {
+    public void updateProfile(ProfileDto profileDto, Long userId) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            profileRepository.setSession(session);
+            profileRepository = ProfileRepository.getInstance(session);
 
             Profile profile = profileRepository
                     .findById(userId)
@@ -35,12 +37,12 @@ public class ProfileService {
         }
     }
 
-    public Profile getByUserId(Long userId, SessionFactory sessionFactory) {
+    public Profile getByUserId(Long userId) {
         Profile profile;
 
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            profileRepository.setSession(session);
+            profileRepository = ProfileRepository.getInstance(session);
 
             profile = profileRepository
                     .getProfileByUserId(userId)
@@ -55,6 +57,16 @@ public class ProfileService {
     }
 
     public static ProfileService getInstance() {
-        return INSTANCE;
+        ProfileService result = instance;
+        if (result != null) {
+            return result;
+        }
+
+        synchronized (ProfileService.class) {
+            if (instance == null) {
+                instance = new ProfileService();
+            }
+            return instance;
+        }
     }
 }
