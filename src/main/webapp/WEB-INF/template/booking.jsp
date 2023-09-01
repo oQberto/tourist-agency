@@ -68,7 +68,7 @@
         <form action="${pageContext.request.contextPath}/booking" method="post">
             <div class="wrapper">
                 <span class="minus">-</span>
-                <input type="text" value="1"/>
+                <input type="text" name="persons" id="persons" value="1"/>
                 <span class="plus">+</span>
             </div>
             <button type="submit">Book</button>
