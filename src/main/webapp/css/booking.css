@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+    background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("/image/background/background.webp") no-repeat center;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+}
+
+.logo_div a {
+    position: absolute;
+    left: 170px;
+}
+
+.logo {
+    font-size: 32px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.navbar a {
+    position: relative;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+    text-decoration: transparent;
+    margin-left: 40px;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.navbar a:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.container {
+    max-width: 75%;
+    height: 80vh;
+    top: 200px;
+    margin: 5% auto auto;
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(17, 17, 17, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);;
+}
+
+.left, .right {
+    width: 50%;
+    padding: 30px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex1 {
+    display: flex;
+}
+
+.main_image img {
+    width: 650px;
+    height: 400px;
+}
+
+.option img {
+    width: 75px;
+    height: 75px;
+    padding: 10px;
+}
+
+.right {
+    padding: 50px 100px 50px 50px;
+    color: white;
+}
+
+h3 {
+    color: white;
+    margin: 20px 0 20px 0;
+    font-size: 25px;
+}
+
+h5,
+p {
+    color: white;
+}
+
+p {
+    margin: 20px 0 50px 0;
+    line-height: 25px;
+}
+
+h5 {
+    font-size: 15px;
+}
+
+.add label {
+    padding: 10px 30px 0 20px;
+    border-radius: 50px;
+    line-height: 0;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: white;
+    margin-top: 20%;
+    border-radius: 30px;
+}
+
+.wrapper{
+    height: 50px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrapper span{
+    width: 100%;
+    text-align: center;
+    font-size: 55px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+}
+.wrapper input {
+    font-size: 50px;
+    color: white;
+    width: 35px;
+    border: none;
+    background: transparent;
+    height: 50px;
+    border-right: 2px solid rgba(0,0,0,0.2);
+    border-left: 2px solid rgba(0,0,0,0.2);
+    pointer-events: none;
+}
+
+@media only screen and (max-width:768px) {
+    .container {
+        max-width: 90%;
+        margin: auto;
+        height: auto;
+    }
+
+    .left, .right {
+        width: 100%;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width:511px) {
+    .container {
+        max-width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
+    .left, .right {
+        padding: 0;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .option {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+footer {
+    position: absolute;
+    top: 1120px;
+    left: 0;
+    right: 0;
+    background: #3cb6d3;
+    height: auto;
+    width: 100vw;
+    padding-top: 40px;
+    color: #fff;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer-content h3 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 3rem;
+}
+
+.footer-content p {
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 28px;
+    font-size: 14px;
+}
+
+.socials {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+
+.socials li {
+    margin: 0 10px;
+}
+
+.socials a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.socials a img {
+    font-size: 1.1rem;
+    transition: color .4s ease;
+}
+
+.footer-bottom {
+    background: #3cb6d3;
+    width: 100vw;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+}
+
+.footer-bottom span {
+    text-transform: uppercase;
+    opacity: .6;
+    font-weight: 200;
+}

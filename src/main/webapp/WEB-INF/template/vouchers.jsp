@@ -50,7 +50,7 @@
                 ${voucher.description}
             </p>
             <span class="price">${voucher.price} $</span>
-            <a href="${pageContext.request.contextPath}/book">Book</a>
+            <a href="${pageContext.request.contextPath}/booking?voucherId=${voucher.id}&price=${voucher.price}&name=${voucher.name}">Book</a>
             <div class="rate">
                 <span class="rate_num">5.0</span>
                 <img class="rate" src='<c:url value="/image/voucher/star.webp"/>'>
