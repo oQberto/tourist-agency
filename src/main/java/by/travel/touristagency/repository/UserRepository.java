@@ -9,10 +9,9 @@ import java.util.Optional;
 import static by.travel.touristagency.entity.QUser.user;
 
 public class UserRepository extends BaseRepository<Long, User> {
-    private static volatile UserRepository instance;
 
-    private UserRepository(Class<User> clazz, Session session) {
-        super(clazz, session);
+    public UserRepository(Session session) {
+        super(User.class, session);
     }
 
     public Optional<User> findByEmailAndPassword(String email, String password) {
@@ -23,19 +22,5 @@ public class UserRepository extends BaseRepository<Long, User> {
                         .where(user.email.eq(email), user.password.eq(password))
                         .fetchOne()
         );
-    }
-
-    public static UserRepository getInstance(Session session) {
-        UserRepository result = instance;
-        if (result != null) {
-            return result;
-        }
-
-        synchronized (BookingRepository.class) {
-            if (instance == null) {
-                instance = new UserRepository(User.class, session);
-            }
-            return instance;
-        }
     }
 }

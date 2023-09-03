@@ -26,6 +26,7 @@ public class BookingServlet extends HttpServlet {
     private Long voucherId;
     private UserDto user;
 
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         user = (UserDto) req.getSession().getAttribute("user");
         voucherId = Long.valueOf(req.getParameter("voucherId"));

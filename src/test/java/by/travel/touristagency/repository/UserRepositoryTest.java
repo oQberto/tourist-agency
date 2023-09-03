@@ -29,7 +29,7 @@ class UserRepositoryTest {
     @BeforeEach
     public void openSession() {
         session = SESSION_FACTORY.openSession();
-        userRepository = UserRepository.getInstance(session);
+        userRepository = new UserRepository(session);
     }
 
     @AfterEach

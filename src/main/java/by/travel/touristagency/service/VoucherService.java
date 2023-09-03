@@ -22,7 +22,7 @@ public class VoucherService {
         List<Voucher> vouchers;
 
         try (Session session = sessionFactory.openSession()) {
-            voucherRepository = VoucherRepository.getInstance(session);
+            voucherRepository = new VoucherRepository(session);
             session.beginTransaction();
 
             vouchers = voucherRepository.getVouchersByCompanyId(id);
@@ -37,7 +37,7 @@ public class VoucherService {
         Optional<Voucher> voucher;
 
         try (Session session = sessionFactory.openSession()) {
-            voucherRepository = VoucherRepository.getInstance(session);
+            voucherRepository = new VoucherRepository(session);
             session.beginTransaction();
 
             voucher = voucherRepository.findById(id);

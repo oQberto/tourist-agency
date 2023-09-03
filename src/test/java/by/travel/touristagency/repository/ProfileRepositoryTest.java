@@ -29,7 +29,7 @@ class ProfileRepositoryTest {
     @BeforeEach
     public void openSession() {
         session = SESSION_FACTORY.openSession();
-        profileRepository = ProfileRepository.getInstance(session);
+        profileRepository = new ProfileRepository(session);
     }
 
     @AfterEach

@@ -10,10 +10,9 @@ import static by.travel.touristagency.entity.QProfile.profile;
 import static by.travel.touristagency.entity.QUser.user;
 
 public class ProfileRepository extends BaseRepository<Long, Profile> {
-    private static volatile ProfileRepository instance;
 
-    public ProfileRepository(Class<Profile> clazz, Session session) {
-        super(clazz, session);
+    public ProfileRepository(Session session) {
+        super(Profile.class, session);
     }
 
     public Optional<Profile> getProfileByUserId(Long userId) {
@@ -25,19 +24,5 @@ public class ProfileRepository extends BaseRepository<Long, Profile> {
                         .where(user.id.eq(userId))
                         .fetchOne()
         );
-    }
-
-    public static ProfileRepository getInstance(Session session) {
-        ProfileRepository result = instance;
-        if (result != null) {
-            return result;
-        }
-
-        synchronized (ProfileRepository.class) {
-            if (instance == null) {
-                instance = new ProfileRepository(Profile.class, session);
-            }
-            return instance;
-        }
     }
 }

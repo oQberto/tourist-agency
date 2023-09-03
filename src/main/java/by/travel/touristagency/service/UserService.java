@@ -22,7 +22,7 @@ public class UserService {
     public void createUser(UserDto userDto) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            userRepository = UserRepository.getInstance(session);
+            userRepository = new UserRepository(session);
 
             User user = userDtoMapper.map(userDto);
             userRepository.save(user);
@@ -35,7 +35,7 @@ public class UserService {
         Optional<UserDto> userDto;
 
         try (Session session = sessionFactory.openSession()) {
-            userRepository = UserRepository.getInstance(session);
+            userRepository = new UserRepository(session);
             session.beginTransaction();
 
             userDto = userRepository.findByEmailAndPassword(email, password)
@@ -49,7 +49,7 @@ public class UserService {
 
     public void updateUser(UserDto userDto) {
         try (Session session = sessionFactory.openSession()) {
-            userRepository = UserRepository.getInstance(session);
+            userRepository = new UserRepository(session);
             session.beginTransaction();
 
             User user = userRepository
@@ -71,7 +71,7 @@ public class UserService {
         Optional<User> user;
 
         try (Session session = sessionFactory.openSession()) {
-            userRepository = UserRepository.getInstance(session);
+            userRepository = new UserRepository(session);
             session.beginTransaction();
 
             user = userRepository.findById(id);
