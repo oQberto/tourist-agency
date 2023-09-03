@@ -57,17 +57,9 @@
             </div>
             <button type="submit" class="btn">Save changes</button>
         </form>
+        <a href="${pageContext.request.contextPath}/user-bookings" class="a">Bookings</a>
     </div>
 </div>
-<%--<form action="${pageContext.request.contextPath}/profile" method="post">--%>
-<%--    <p><input type="text" name="password" id="password" value="${sessionScope.user.password}"></p><br>--%>
-<%--    <p><input type="text" name="email" id="email" value="${sessionScope.user.email}"></p><br>--%>
-<%--    <p><input type="text" name="username" id="username" value="${sessionScope.user.username}"></p><br>--%>
-<%--    <p><input type="text" name="firstName" id="firstName" value="${sessionScope.profile.firstName}"></p><br>--%>
-<%--    <p><input type="text" name="lastName" id="lastName" value="${sessionScope.profile.lastName}"></p><br>--%>
-<%--    <p><input type="text" name="birthday" id="birthday" value="${sessionScope.profile.birthday}"></p><br>--%>
-<%--    <button type="submit">Save</button>--%>
-<%--</form>--%>
 
 <footer>
     <div class="footer-content">
