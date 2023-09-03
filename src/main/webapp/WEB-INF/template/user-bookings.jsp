@@ -31,22 +31,16 @@
     </nav>
 </header>
 
-<div class="bookings">
-    <c:forEach var="voucher" items="${requestScope.vouchers}">
+<div class="vouchers">
+    <c:forEach var="voucher" items="${sessionScope.user_vouchers}">
         <div class="voucher">
-            <img src='<c:url value="/image/voucher/${voucher.image}"/>'>
-            <h2>
-                    ${voucher.name}
-            </h2>
-            <p>
-                    ${voucher.description}
-            </p>
-            <span class="price">${voucher.price} $</span>
-            <a href="${pageContext.request.contextPath}/booking?voucherId=${voucher.id}&price=${voucher.price}&name=${voucher.name}">Book</a>
-            <div class="rate">
-                <span class="rate_num">5.0</span>
-                <img class="rate" src='<c:url value="/image/voucher/star.webp"/>'>
-            </div>
+            <form action="${pageContext.request.contextPath}/user-bookings?voucherId=${voucher.id}&voucherName=${voucher.name}" method="post">
+                <img src='<c:url value="/image/voucher/${voucher.image}"/>'>
+                <h2>${voucher.name}</h2>
+                <p>${voucher.description}</p>
+                <span class="price">${voucher.price} $</span>
+                <button type="submit">Book</button>
+            </form>
         </div>
     </c:forEach>
 </div>

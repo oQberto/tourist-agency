@@ -45,7 +45,7 @@ public class TestDataImporter {
             saveProfile(session, user5, "FName5", "LName5", LocalDate.of(2002, 9, 16));
             saveProfile(session, user6, "FName6", "LName6", LocalDate.of(2001, 4, 25));
             saveProfile(session, user7, "FName7", "LName7", LocalDate.of(2004, 3, 14));
-            saveProfile(session, user8, "FName8", "LName8", LocalDate.of(2001, 1, 05));
+            saveProfile(session, user8, "FName8", "LName8", LocalDate.of(2001, 1, 5));
             saveProfile(session, user9, "FName9", "LName9", LocalDate.of(2002, 1, 21));
             saveProfile(session, user10, "FName10", "LNam10e", LocalDate.of(2004, 1, 21));
             saveProfile(session, user11, "FName11", "LName11", LocalDate.of(2001, 5, 29));
@@ -109,7 +109,7 @@ public class TestDataImporter {
             saveBooking(session, 1, user9, voucher3);
             saveBooking(session, 3, user1, voucher);
             saveBooking(session, 2, user8, voucher2);
-            saveBooking(session, 2, user, voucher5);
+            saveBooking(session, 2, user, voucher6);
             saveBooking(session, 3, user10, voucher5);
             saveBooking(session, 1, user6, voucher4);
             saveBooking(session, 2, user9, voucher1);
