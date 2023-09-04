@@ -2,6 +2,7 @@ package by.travel.touristagency.mapper;
 
 import by.travel.touristagency.dto.BookingDto;
 import by.travel.touristagency.entity.Booking;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 import static lombok.AccessLevel.PRIVATE;
@@ -19,6 +20,7 @@ public class BookingMapper implements Mapper<BookingDto, Booking> {
                 .build();
     }
 
+    @Generated
     public static BookingMapper getInstance() {
         BookingMapper result = instance;
         if (result != null) {

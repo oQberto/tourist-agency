@@ -2,13 +2,14 @@ package by.travel.touristagency.mapper;
 
 import by.travel.touristagency.dto.UserDto;
 import by.travel.touristagency.entity.User;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
 public class UserDtoMapper implements Mapper<UserDto, User> {
-    private static final UserDtoMapper INSTANCE = new UserDtoMapper();
+    private static volatile UserDtoMapper instance = new UserDtoMapper();
 
     @Override
     public User map(UserDto object) {
@@ -20,7 +21,18 @@ public class UserDtoMapper implements Mapper<UserDto, User> {
                 .build();
     }
 
+    @Generated
     public static UserDtoMapper getInstance() {
-        return INSTANCE;
+        UserDtoMapper result  = instance;
+        if (result != null) {
+            return result;
+        }
+
+        synchronized (UserDtoMapper.class) {
+            if (instance == null) {
+                instance = new UserDtoMapper();
+            }
+            return instance;
+        }
     }
 }
