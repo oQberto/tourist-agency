@@ -8,9 +8,6 @@ public class HibernateSessionFactoryUtil {
 
     public SessionFactory buildSessionFactory() {
         Configuration configuration = buildConfiguration();
-        configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/travel_agency_repository");
-        configuration.setProperty("hibernate.connection.username", "postgres");
-        configuration.setProperty("hibernate.connection.password", "postgres");
         configuration.configure();
 
         return configuration.buildSessionFactory();
