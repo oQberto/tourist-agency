@@ -6,6 +6,7 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberTemplate;
 import com.querydsl.jpa.impl.JPAQuery;
+import lombok.Generated;
 import org.hibernate.Session;
 import org.hibernate.query.SortDirection;
 
@@ -15,6 +16,7 @@ import static by.travel.touristagency.entity.QVoucher.voucher;
 
 public class VoucherRepository extends BaseRepository<Long, Voucher> {
 
+    @Generated
     public VoucherRepository(Session session) {
         super(Voucher.class, session);
     }

@@ -7,6 +7,7 @@ import by.travel.touristagency.mapper.UserMapper;
 import by.travel.touristagency.repository.UserRepository;
 import by.travel.touristagency.util.HibernateSessionFactoryUtil;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.Generated;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -82,6 +83,7 @@ public class UserService {
         return user;
     }
 
+    @Generated
     public static UserService getInstance() {
         UserService result = instance;
         if (result != null) {

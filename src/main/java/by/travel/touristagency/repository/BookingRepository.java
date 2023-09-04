@@ -3,6 +3,7 @@ package by.travel.touristagency.repository;
 import by.travel.touristagency.entity.Booking;
 import by.travel.touristagency.entity.Voucher;
 import com.querydsl.jpa.impl.JPAQuery;
+import lombok.Generated;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import static by.travel.touristagency.entity.QVoucher.voucher;
 
 public class BookingRepository extends BaseRepository<Long, Booking> {
 
+    @Generated
     public BookingRepository(Session session) {
         super(Booking.class, session);
     }

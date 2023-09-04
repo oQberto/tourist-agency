@@ -4,6 +4,7 @@ import by.travel.touristagency.entity.Booking;
 import by.travel.touristagency.entity.Voucher;
 import by.travel.touristagency.repository.BookingRepository;
 import by.travel.touristagency.util.HibernateSessionFactoryUtil;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -71,6 +72,7 @@ public class BookingService {
         }
     }
 
+    @Generated
     public static BookingService getInstance() {
         BookingService result = instance;
         if (result != null) {

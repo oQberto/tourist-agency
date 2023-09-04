@@ -2,6 +2,7 @@ package by.travel.touristagency.service;
 
 import by.travel.touristagency.entity.Company;
 import by.travel.touristagency.repository.CompanyRepository;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,13 +13,13 @@ import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
 public class CompanyService {
-    private static final CompanyService INSTANCE = new CompanyService();
-    private final CompanyRepository companyRepository = new CompanyRepository(null);
+    private static volatile CompanyService instance;
+    private CompanyRepository companyRepository;
 
     public List<Company> getAllCompanies(SessionFactory sessionFactory) {
         List<Company> companies;
         try (Session session = sessionFactory.openSession()) {
-            companyRepository.setSession(session);
+            companyRepository = new CompanyRepository(session);
             session.beginTransaction();
 
             companies = companyRepository.getAll();
@@ -28,7 +29,18 @@ public class CompanyService {
         return companies;
     }
 
+    @Generated
     public static CompanyService getInstance() {
-        return INSTANCE;
+        CompanyService result = instance;
+        if (result != null) {
+            return result;
+        }
+
+        synchronized (CompanyService.class) {
+            if (instance == null) {
+                instance = new CompanyService();
+            }
+            return instance;
+        }
     }
 }

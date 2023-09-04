@@ -3,6 +3,7 @@ package by.travel.touristagency.service;
 import by.travel.touristagency.entity.Voucher;
 import by.travel.touristagency.repository.VoucherRepository;
 import by.travel.touristagency.util.HibernateSessionFactoryUtil;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -48,6 +49,7 @@ public class VoucherService {
         return voucher;
     }
 
+    @Generated
     public static VoucherService getInstance() {
         VoucherService result = instance;
         if (result != null) {

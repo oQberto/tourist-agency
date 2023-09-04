@@ -5,6 +5,7 @@ import by.travel.touristagency.entity.Profile;
 import by.travel.touristagency.repository.ProfileRepository;
 import by.travel.touristagency.util.HibernateSessionFactoryUtil;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -56,6 +57,7 @@ public class ProfileService {
         return profile;
     }
 
+    @Generated
     public static ProfileService getInstance() {
         ProfileService result = instance;
         if (result != null) {

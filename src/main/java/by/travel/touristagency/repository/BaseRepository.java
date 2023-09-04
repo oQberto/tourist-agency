@@ -6,7 +6,6 @@ import jakarta.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.hibernate.Session;
 
 import java.io.Serializable;
@@ -18,8 +17,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class BaseRepository<K extends Serializable, E> implements Repository<K, E> {
     private final Class<E> clazz;
-
-    @Setter
     private Session session;
 
     @Override

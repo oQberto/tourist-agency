@@ -2,6 +2,7 @@ package by.travel.touristagency.repository;
 
 import by.travel.touristagency.entity.Profile;
 import com.querydsl.jpa.impl.JPAQuery;
+import lombok.Generated;
 import org.hibernate.Session;
 
 import java.util.Optional;
@@ -11,6 +12,7 @@ import static by.travel.touristagency.entity.QUser.user;
 
 public class ProfileRepository extends BaseRepository<Long, Profile> {
 
+    @Generated
     public ProfileRepository(Session session) {
         super(Profile.class, session);
     }
