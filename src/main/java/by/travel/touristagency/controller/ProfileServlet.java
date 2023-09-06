@@ -2,8 +2,11 @@ package by.travel.touristagency.controller;
 
 import by.travel.touristagency.dto.ProfileDto;
 import by.travel.touristagency.dto.UserDto;
+import by.travel.touristagency.mapper.UserDtoMapper;
+import by.travel.touristagency.mapper.UserMapper;
 import by.travel.touristagency.service.ProfileService;
 import by.travel.touristagency.service.UserService;
+import by.travel.touristagency.util.HibernateSessionFactoryUtil;
 import by.travel.touristagency.util.JSPHelper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,7 +20,12 @@ import java.time.LocalDate;
 @WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
     private final ProfileService profileService = ProfileService.getInstance();
-    private final UserService userService = UserService.getInstance();
+    private final UserService userService = new UserService(
+            HibernateSessionFactoryUtil.getInstance().buildSessionFactory(),
+            UserDtoMapper.getInstance(),
+            UserMapper.getInstance()
+    );
+
     private Long userId;
     private Long profileId;
 

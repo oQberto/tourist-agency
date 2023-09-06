@@ -2,8 +2,11 @@ package by.travel.touristagency.controller;
 
 import by.travel.touristagency.dto.UserDto;
 import by.travel.touristagency.entity.Profile;
+import by.travel.touristagency.mapper.UserDtoMapper;
+import by.travel.touristagency.mapper.UserMapper;
 import by.travel.touristagency.service.ProfileService;
 import by.travel.touristagency.service.UserService;
+import by.travel.touristagency.util.HibernateSessionFactoryUtil;
 import by.travel.touristagency.util.JSPHelper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,8 +19,12 @@ import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private final UserService userService = UserService.getInstance();
     private final ProfileService profileService = ProfileService.getInstance();
+    private final UserService userService = new UserService(
+            HibernateSessionFactoryUtil.getInstance().buildSessionFactory(),
+            UserDtoMapper.getInstance(),
+            UserMapper.getInstance()
+    );
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

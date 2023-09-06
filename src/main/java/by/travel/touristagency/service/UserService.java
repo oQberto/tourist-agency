@@ -5,19 +5,18 @@ import by.travel.touristagency.entity.User;
 import by.travel.touristagency.mapper.UserDtoMapper;
 import by.travel.touristagency.mapper.UserMapper;
 import by.travel.touristagency.repository.UserRepository;
-import by.travel.touristagency.util.HibernateSessionFactoryUtil;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.Generated;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
 public class UserService {
-    private static volatile UserService instance;
-    private final SessionFactory sessionFactory = HibernateSessionFactoryUtil.getInstance().buildSessionFactory();
-    private final UserDtoMapper userDtoMapper = UserDtoMapper.getInstance();
-    private final UserMapper userMapper = UserMapper.getInstance();
+    private final SessionFactory sessionFactory;
+    private final UserDtoMapper userDtoMapper;
+    private final UserMapper userMapper;
     private UserRepository userRepository;
 
     public void createUser(UserDto userDto) {
@@ -83,17 +82,17 @@ public class UserService {
         return user;
     }
 
-    @Generated
-    public static UserService getInstance() {
-        UserService result = instance;
-        if (result != null) {
-            return result;
-        }
-        synchronized (UserService.class) {
-            if (instance == null) {
-                instance = new UserService();
-            }
-            return instance;
-        }
-    }
+//    @Generated
+//    public static UserService getInstance() {
+//        UserService result = instance;
+//        if (result != null) {
+//            return result;
+//        }
+//        synchronized (UserService.class) {
+//            if (instance == null) {
+//                instance = new UserService();
+//            }
+//            return instance;
+//        }
+//    }
 }
