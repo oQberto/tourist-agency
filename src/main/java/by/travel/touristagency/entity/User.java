@@ -13,6 +13,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(exclude = {"profile", "bookings"})
 @ToString(exclude = {"profile", "bookings"})
 @Entity
 @Table(name = "users", schema = "public")
