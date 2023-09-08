@@ -39,7 +39,7 @@
                 <h2>${voucher.name}</h2>
                 <p>${voucher.description}</p>
                 <span class="price">${voucher.price} $</span>
-                <button type="submit">Book</button>
+                <button type="submit">Remove</button>
             </form>
         </div>
     </c:forEach>
