@@ -22,8 +22,10 @@ import java.io.IOException;
 @WebServlet("/booking")
 public class BookingServlet extends HttpServlet {
     private final BookingService bookingService = BookingService.getInstance();
-    private final VoucherService voucherService = VoucherService.getInstance();
     private final BookingMapper bookingMapper = BookingMapper.getInstance();
+    private final VoucherService voucherService = new VoucherService(
+            HibernateSessionFactoryUtil.getInstance().buildSessionFactory()
+    );
     private final UserService userService = new UserService(
             HibernateSessionFactoryUtil.getInstance().buildSessionFactory(),
             UserDtoMapper.getInstance(),

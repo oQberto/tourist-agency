@@ -2,21 +2,16 @@ package by.travel.touristagency.service;
 
 import by.travel.touristagency.entity.Voucher;
 import by.travel.touristagency.repository.VoucherRepository;
-import by.travel.touristagency.util.HibernateSessionFactoryUtil;
-import lombok.Generated;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Optional;
 
-import static lombok.AccessLevel.PRIVATE;
-
-@NoArgsConstructor(access = PRIVATE)
+@RequiredArgsConstructor
 public class VoucherService {
-    private static volatile VoucherService instance;
-    private final SessionFactory sessionFactory = HibernateSessionFactoryUtil.getInstance().buildSessionFactory();
+    private final SessionFactory sessionFactory;
     private VoucherRepository voucherRepository;
 
     public List<Voucher> getVouchersByCompanyId(Long id) {
@@ -47,20 +42,5 @@ public class VoucherService {
         }
 
         return voucher;
-    }
-
-    @Generated
-    public static VoucherService getInstance() {
-        VoucherService result = instance;
-        if (result != null) {
-            return result;
-        }
-
-        synchronized (VoucherService.class) {
-            if (instance == null) {
-                instance = new VoucherService();
-            }
-            return instance;
-        }
     }
 }
