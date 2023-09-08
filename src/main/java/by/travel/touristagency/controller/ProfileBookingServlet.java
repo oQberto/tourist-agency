@@ -3,7 +3,9 @@ package by.travel.touristagency.controller;
 import by.travel.touristagency.dto.UserDto;
 import by.travel.touristagency.entity.Booking;
 import by.travel.touristagency.entity.Voucher;
+import by.travel.touristagency.mapper.BookingMapper;
 import by.travel.touristagency.service.BookingService;
+import by.travel.touristagency.util.HibernateSessionFactoryUtil;
 import by.travel.touristagency.util.JSPHelper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.ServletException;
@@ -17,9 +19,13 @@ import java.util.List;
 
 @WebServlet("/user-bookings")
 public class ProfileBookingServlet extends HttpServlet {
-    private final BookingService bookingService = BookingService.getInstance();
+    private final BookingService bookingService = new BookingService(
+            HibernateSessionFactoryUtil.getInstance().buildSessionFactory(),
+            BookingMapper.getInstance()
+    );
     private List<Voucher> vouchersByUserId;
     private Long userId;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDto user = (UserDto) req.getSession().getAttribute("user");

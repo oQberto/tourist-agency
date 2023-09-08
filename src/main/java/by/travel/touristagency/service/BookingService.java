@@ -1,31 +1,29 @@
 package by.travel.touristagency.service;
 
+import by.travel.touristagency.dto.BookingDto;
 import by.travel.touristagency.entity.Booking;
 import by.travel.touristagency.entity.Voucher;
+import by.travel.touristagency.mapper.BookingMapper;
 import by.travel.touristagency.repository.BookingRepository;
-import by.travel.touristagency.util.HibernateSessionFactoryUtil;
-import lombok.Generated;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Optional;
 
-import static lombok.AccessLevel.PRIVATE;
-
-@NoArgsConstructor(access = PRIVATE)
+@RequiredArgsConstructor
 public class BookingService {
-    private static volatile BookingService instance;
-    private final SessionFactory sessionFactory = HibernateSessionFactoryUtil.getInstance().buildSessionFactory();
+    private final SessionFactory sessionFactory;
+    private final BookingMapper bookingMapper;
     private BookingRepository bookingRepository;
 
-    public void createBooking(Booking booking) {
+    public void createBooking(BookingDto bookingDto) {
         try (Session session = sessionFactory.openSession()) {
             bookingRepository = new BookingRepository(session);
             session.beginTransaction();
 
-            bookingRepository.save(booking);
+            bookingRepository.save(bookingMapper.map(bookingDto));
 
             session.getTransaction().commit();
         }
@@ -69,20 +67,6 @@ public class BookingService {
             bookingRepository.delete(id);
 
             session.getTransaction().commit();
-        }
-    }
-
-    @Generated
-    public static BookingService getInstance() {
-        BookingService result = instance;
-        if (result != null) {
-            return result;
-        }
-        synchronized (BookingService.class) {
-            if (instance == null) {
-                instance = new BookingService();
-            }
-            return instance;
         }
     }
 }

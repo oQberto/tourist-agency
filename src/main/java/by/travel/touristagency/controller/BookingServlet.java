@@ -16,18 +16,20 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.hibernate.SessionFactory;
 
 import java.io.IOException;
 
 @WebServlet("/booking")
 public class BookingServlet extends HttpServlet {
-    private final BookingService bookingService = BookingService.getInstance();
-    private final BookingMapper bookingMapper = BookingMapper.getInstance();
-    private final VoucherService voucherService = new VoucherService(
-            HibernateSessionFactoryUtil.getInstance().buildSessionFactory()
+    private static final SessionFactory SESSION_FACTORY = HibernateSessionFactoryUtil.getInstance().buildSessionFactory();
+    private final VoucherService voucherService = new VoucherService(SESSION_FACTORY);
+    private final BookingService bookingService = new BookingService(
+            SESSION_FACTORY,
+            BookingMapper.getInstance()
     );
     private final UserService userService = new UserService(
-            HibernateSessionFactoryUtil.getInstance().buildSessionFactory(),
+            SESSION_FACTORY,
             UserDtoMapper.getInstance(),
             UserMapper.getInstance()
     );
@@ -53,7 +55,7 @@ public class BookingServlet extends HttpServlet {
             resp.sendRedirect("/login");
         } else {
             BookingDto bookingDto = buildBookingDto();
-            bookingService.createBooking(bookingMapper.map(bookingDto));
+            bookingService.createBooking(bookingDto);
         }
     }
 
