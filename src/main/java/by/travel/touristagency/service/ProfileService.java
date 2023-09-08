@@ -3,19 +3,16 @@ package by.travel.touristagency.service;
 import by.travel.touristagency.dto.ProfileDto;
 import by.travel.touristagency.entity.Profile;
 import by.travel.touristagency.repository.ProfileRepository;
-import by.travel.touristagency.util.HibernateSessionFactoryUtil;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.Generated;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import static lombok.AccessLevel.PRIVATE;
+import java.util.Optional;
 
-@NoArgsConstructor(access = PRIVATE)
+@RequiredArgsConstructor
 public class ProfileService {
-    private final SessionFactory sessionFactory = HibernateSessionFactoryUtil.getInstance().buildSessionFactory();
-    private static volatile ProfileService instance;
+    private final SessionFactory sessionFactory;
     private  ProfileRepository profileRepository;
 
     public void updateProfile(ProfileDto profileDto, Long userId) {
@@ -38,37 +35,18 @@ public class ProfileService {
         }
     }
 
-    public Profile getByUserId(Long userId) {
-        Profile profile;
+    public Optional<Profile> getByUserId(Long userId) {
+        Optional<Profile> profile;
 
         try (Session session = sessionFactory.openSession()) {
             profileRepository = new ProfileRepository(session);
             session.beginTransaction();
 
-            profile = profileRepository
-                    .getProfileByUserId(userId)
-                    .orElseThrow(
-                            () -> new EntityNotFoundException("Profile not found")
-                    );
+            profile = profileRepository.getProfileByUserId(userId);
 
             session.getTransaction().commit();
         }
 
         return profile;
-    }
-
-    @Generated
-    public static ProfileService getInstance() {
-        ProfileService result = instance;
-        if (result != null) {
-            return result;
-        }
-
-        synchronized (ProfileService.class) {
-            if (instance == null) {
-                instance = new ProfileService();
-            }
-            return instance;
-        }
     }
 }

@@ -12,6 +12,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(exclude = "user")
 @ToString(exclude = "user")
 @Entity
 public class Profile {

@@ -19,7 +19,9 @@ import java.time.LocalDate;
 
 @WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
-    private final ProfileService profileService = ProfileService.getInstance();
+    private final ProfileService profileService = new ProfileService(
+            HibernateSessionFactoryUtil.getInstance().buildSessionFactory()
+    );
     private final UserService userService = new UserService(
             HibernateSessionFactoryUtil.getInstance().buildSessionFactory(),
             UserDtoMapper.getInstance(),

@@ -16,10 +16,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private final ProfileService profileService = ProfileService.getInstance();
+    private final ProfileService profileService = new ProfileService(
+            HibernateSessionFactoryUtil.getInstance().buildSessionFactory()
+    );
     private final UserService userService = new UserService(
             HibernateSessionFactoryUtil.getInstance().buildSessionFactory(),
             UserDtoMapper.getInstance(),
@@ -50,12 +53,12 @@ public class LoginServlet extends HttpServlet {
 
     @SneakyThrows
     private void onLoginSuccess(UserDto user, HttpServletRequest req, HttpServletResponse resp) {
-        Profile profile = profileService.getByUserId(user.getId());
+        Optional<Profile> profile = profileService.getByUserId(user.getId());
 
         req.getSession().setAttribute("user", user);
         req.getSession().setAttribute("profile", profile);
         req.getSession().setAttribute("userId", user.getId());
-        req.getSession().setAttribute("profileId", profile.getId());
+        req.getSession().setAttribute("profileId", profile.get().getId());
 
         resp.sendRedirect("/travel_by");
     }
