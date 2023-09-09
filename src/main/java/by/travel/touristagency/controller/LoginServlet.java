@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
         Optional<Profile> profile = profileService.getByUserId(user.getId());
 
         req.getSession().setAttribute("user", user);
-        req.getSession().setAttribute("profile", profile);
+        req.getSession().setAttribute("profile", profile.get());
         req.getSession().setAttribute("userId", user.getId());
         req.getSession().setAttribute("profileId", profile.get().getId());
 

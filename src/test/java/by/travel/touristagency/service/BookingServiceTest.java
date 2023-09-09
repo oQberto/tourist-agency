@@ -36,7 +36,7 @@ class BookingServiceTest {
                 .numberOfPersons(4)
                 .build();
         Booking booking = BookingMapper.getInstance().map(bookingDto);
-        booking.setId(42L);
+        booking.setId(41L);
 
         bookingService.createBooking(bookingDto);
         Optional<Booking> actualResult = bookingService.getBookingByVoucherIdAndUserId(buildVoucher().getId(), buildUser().getId());
@@ -66,7 +66,13 @@ class BookingServiceTest {
 
     @Test
     void deleteBookingFromUserProfile() {
-        // TODO: create a test here
+        Optional<Booking> actualResult = bookingService.getBookingByVoucherIdAndUserId(8L, 2L);
+        assertThat(actualResult).isPresent();
+
+        bookingService.deleteBookingFromUserProfile(actualResult.get().getId());
+
+        List<Voucher> userVouchersAfterDeleting = bookingService.getVouchersByUserId(2L);
+        assertThat(userVouchersAfterDeleting).hasSize(3);
     }
 
     private Voucher buildVoucher() {

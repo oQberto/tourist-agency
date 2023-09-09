@@ -106,7 +106,6 @@ public class TestDataImporter {
             saveBooking(session, 1, user12, voucher3);
             saveBooking(session, 4, user11, voucher10);
             saveBooking(session, 1, user9, voucher3);
-            saveBooking(session, 3, user1, voucher);
             saveBooking(session, 2, user8, voucher2);
             saveBooking(session, 2, user, voucher6);
             saveBooking(session, 3, user10, voucher5);
