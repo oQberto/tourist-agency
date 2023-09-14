@@ -39,6 +39,7 @@ for creating the interface, client-side components, and logging.
 The project utilizes the following technologies and libraries:
 
 * **Java 19**: As the primary programming language.
+* **Servlets**: For handling HTTP requests and responses, managing user sessions, and controlling the application's flow.
 * **Hibernate**: For working with the PostgreSQL database.
 * **PostgreSQL**: As the database for storing information about travel packages and users.
 * **Apache Tomcat 10.1.8**: For deploying the web application.
