@@ -26,6 +26,7 @@ for creating the interface, client-side components, and logging.
 
 ### For users (Future Features)
 * **Sorting Travel Packages**: Users will have the ability to sort travel packages based on various parameters for ease of selection.
+* **Search for Travel Packages by name**: Users can search for travel packages by name using a search bar, making it easier to find specific packages of interest.
 
 ### For Companies (Future Features):
 **Company Registration and Login**: Travel companies will be able to register and log in to the system on behalf of their company.
@@ -48,6 +49,7 @@ The project utilizes the following technologies and libraries:
 ## Database Setup
 
 Scripts for creating the database can be found in the script.sql file. To set up the database, execute the scripts provided in this file.
+![img.png](src/main/resources/readme/db_diagram.png)
 
 ## Monitor Compatibility
 This project is optimized for correct display on a 27'' monitor. The layout and interface are designed with this specific screen configuration in mind, ensuring the best user experience on a 27'' monitor.
@@ -58,6 +60,8 @@ This project is optimized for correct display on a 27'' monitor. The layout and 
 * Create the PostgreSQL database and configure the Hibernate configuration.
 * Start Apache Tomcat and deploy the web application.
 * Access the application in a web browser (http://localhost:8080/travel_by).
+### Application's home page
+![img.png](src/main/resources/readme/home_page.png)
 
 ## Contributing to the Project
 
