@@ -1,9 +1,11 @@
 package by.travel.touristagency.service;
 
 import by.travel.touristagency.dto.UserDto;
+import by.travel.touristagency.entity.Profile;
 import by.travel.touristagency.entity.User;
 import by.travel.touristagency.mapper.UserDtoMapper;
 import by.travel.touristagency.mapper.UserMapper;
+import by.travel.touristagency.repository.ProfileRepository;
 import by.travel.touristagency.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -18,14 +20,21 @@ public class UserService {
     private final UserDtoMapper userDtoMapper;
     private final UserMapper userMapper;
     private UserRepository userRepository;
+    private ProfileRepository profileRepository;
 
     public void createUser(UserDto userDto) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             userRepository = new UserRepository(session);
+            profileRepository = new ProfileRepository(session);
 
             User user = userDtoMapper.map(userDto);
             userRepository.save(user);
+
+            Profile profile = Profile.builder()
+                    .user(user)
+                    .build();
+            profileRepository.save(profile);
 
             session.getTransaction().commit();
         }
@@ -81,18 +90,4 @@ public class UserService {
 
         return user;
     }
-
-//    @Generated
-//    public static UserService getInstance() {
-//        UserService result = instance;
-//        if (result != null) {
-//            return result;
-//        }
-//        synchronized (UserService.class) {
-//            if (instance == null) {
-//                instance = new UserService();
-//            }
-//            return instance;
-//        }
-//    }
 }

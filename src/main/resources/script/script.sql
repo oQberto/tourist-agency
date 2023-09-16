@@ -23,6 +23,9 @@ CREATE TABLE users
     email    VARCHAR(256) NOT NULL UNIQUE
 );
 
+ALTER TABLE users
+ADD CONSTRAINT email_unique UNIQUE (email);
+
 INSERT INTO users (username, password, email)
 VALUES ('UName1', '123', 'name1@mail.com'),
        ('UName2', '123', 'name2@mail.com'),
