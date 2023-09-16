@@ -67,6 +67,11 @@ body {
     transform: scaleX(1);
 }
 
+.error {
+    text-align: center;
+    color: white;
+}
+
 .wrapper {
     position: relative;
     width: 400px;
