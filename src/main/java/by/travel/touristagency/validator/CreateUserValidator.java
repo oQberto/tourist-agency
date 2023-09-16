@@ -1,24 +1,19 @@
 package by.travel.touristagency.validator;
 
-import by.travel.touristagency.dto.UserDto;
-import by.travel.touristagency.repository.UserRepository;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
-public class CreateUserValidator implements Validator<UserDto, UserRepository> {
+public class CreateUserValidator implements Validator<Boolean> {
     private static CreateUserValidator instance;
 
     @Override
-    public ValidationResult isValid(UserDto object, UserRepository userRepository) {
-        boolean isUserExist = userRepository
-                .findByEmailAndPassword(object.getEmail(), object.getPassword())
-                .isPresent();
+    public ValidationResult isValid(Boolean isUserExist) {
         ValidationResult validationResult = new ValidationResult();
 
-        if (isUserExist) {
+        if (!isUserExist) {
             validationResult.add(Error.of("invalid.user", "This user is already existing."));
         }
 
