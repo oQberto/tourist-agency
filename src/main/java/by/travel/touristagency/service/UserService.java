@@ -3,19 +3,24 @@ package by.travel.touristagency.service;
 import by.travel.touristagency.dto.UserDto;
 import by.travel.touristagency.entity.Profile;
 import by.travel.touristagency.entity.User;
+import by.travel.touristagency.exception.ValidationException;
 import by.travel.touristagency.mapper.UserDtoMapper;
 import by.travel.touristagency.mapper.UserMapper;
 import by.travel.touristagency.repository.ProfileRepository;
 import by.travel.touristagency.repository.UserRepository;
+import by.travel.touristagency.validator.CreateUserValidator;
+import by.travel.touristagency.validator.ValidationResult;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.Optional;
 
 @RequiredArgsConstructor
 public class UserService {
+    private final CreateUserValidator createUserValidator = CreateUserValidator.getInstance();
     private final SessionFactory sessionFactory;
     private final UserDtoMapper userDtoMapper;
     private final UserMapper userMapper;
@@ -37,6 +42,9 @@ public class UserService {
             profileRepository.save(profile);
 
             session.getTransaction().commit();
+        } catch (ConstraintViolationException e) {
+            ValidationResult validationResult = createUserValidator.isValid(false);
+            throw new ValidationException(validationResult.getErrors());
         }
     }
 

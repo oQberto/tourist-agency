@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Travel.by Login</title>
@@ -27,6 +28,13 @@
 </header>
 <div class="wrapper">
     <div class="form-box login">
+        <c:if test="${not empty requestScope.registrationError}">
+            <div class="error">
+                <c:forEach var="error" items="${requestScope.registrationError}">
+                <span>${error.message}<span>
+                    </c:forEach>
+            </div>
+        </c:if>
         <h2>Login</h2>
         <form action="${pageContext.request.contextPath}/login" method="post">
             <div class="input-box">
