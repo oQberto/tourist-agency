@@ -27,11 +27,19 @@ ALTER TABLE users
 ADD CONSTRAINT email_unique UNIQUE (email);
 
 INSERT INTO users (username, password, email)
-VALUES ('UName1', '123', 'name1@mail.com'),
-       ('UName2', '123', 'name2@mail.com'),
-       ('UName3', '123', 'name3@mail.com'),
-       ('UName4', '123', 'name4@mail.com'),
-       ('UName5', '123', 'name5@mail.com');
+VALUES ('UName', '123', 'uname@gmail.com'),
+       ('UName1', '1231', 'uname1@gmail.com'),
+       ('UName2', '1232', 'uname2@gmail.com'),
+       ('UName3', '1233', 'uname3@gmail.com'),
+       ('UName4', '1234', 'uname4@gmail.com'),
+       ('UName5', '1235', 'uname5@gmail.com'),
+       ('UName6', '1236', 'uname6@gmail.com'),
+       ('UName7', '1237', 'uname7@gmail.com'),
+       ('UName8', '1238', 'uname8@gmail.com'),
+       ('UName9', '1239', 'uname9@gmail.com'),
+       ('UName10', '12310', 'uname10@gmail.com'),
+       ('UName11', '12311', 'uname11@gmail.com'),
+       ('UName12', '12312', 'uname12@gmail.com');
 
 CREATE TABLE profile
 (
@@ -43,11 +51,19 @@ CREATE TABLE profile
 );
 
 INSERT INTO profile(user_id, first_name, last_name, birthday)
-VALUES (6, 'FName1', 'LName1', '1999-11-05'),
-       (7, 'FName2', 'LName2', '2000-10-12'),
-       (8, 'FName3', 'LName3', '2001-12-12'),
-       (9, 'FName4', 'LName4', '2002-06-17'),
-       (10, 'FName5', 'LName5', '2000-08-25');
+VALUES (1, 'FName', 'LName', '2000-09-15'),
+       (2, 'FName1', 'LName1', '2001-08-24'),
+       (3, 'FName2', 'LName2', '2002-04-13'),
+       (4, 'FName3', 'LName3', '2003-06-04'),
+       (5, 'FName4', 'LName4', '2003-10-08'),
+       (6, 'FName5', 'LName5', '2002-09-16'),
+       (7, 'FName6', 'LName6', '2001-04-24'),
+       (8, 'FName7', 'LName7', '2004-03-14'),
+       (9, 'FName8', 'LName8', '2001-01-05'),
+       (10, 'FName9', 'LName9', '2002-01-21'),
+       (11, 'FName10', 'LName10', '2004-01-21'),
+       (12, 'FName11', 'LName11', '2001-05-29'),
+       (13, 'FName12', 'LName12', '2000-02-28');
 
 CREATE TABLE company
 (
@@ -59,11 +75,11 @@ CREATE TABLE company
 ALTER TABLE company
     ADD COLUMN company_image VARCHAR(128);
 
-INSERT INTO company(name)
-VALUES ('Company1'),
-       ('Company2'),
-       ('Company3'),
-       ('Company4');
+INSERT INTO company(name, company_image)
+VALUES ('Spain Agency', 'spainCompany.webp'),
+       ('GreeceAgency', 'greeceCompany.webp'),
+       ('Belarus Agency', 'belarusCompany.webp'),
+       ('Brazil Agency', 'brazilCompany.webp');
 
 CREATE TABLE voucher
 (
@@ -76,25 +92,18 @@ CREATE TABLE voucher
     image       VARCHAR(256)
 );
 
-INSERT INTO voucher(company_id, name, price, type, description)
-VALUES (1, 'Voucher1', 123.25, 'THERAPY', null),
-       (2, 'Voucher2', 193.25, 'SHOPPING', null),
-       (3, 'Voucher3', 143.25, 'CRUISE', null),
-       (2, 'Voucher4', 113.25, 'SHOPPING', null),
-       (3, 'Voucher5', 173.25, 'CRUISE', null),
-       (4, 'Voucher6', 153.25, 'EXCURSION', null),
-       (1, 'Voucher7', 123.25, 'THERAPY', null),
-       (2, 'Voucher8', 293.25, 'SHOPPING', null),
-       (1, 'Voucher9', 143.25, 'CRUISE', null),
-       (3, 'Voucher10', 113.25, 'SHOPPING', null),
-       (3, 'Voucher11', 173.25, 'REST', null),
-       (4, 'Voucher12', 153.25, 'EXCURSION', null),
-       (3, 'Voucher13', 223.25, 'THERAPY', null),
-       (4, 'Voucher14', 193.25, 'REST', null),
-       (3, 'Voucher15', 143.25, 'CRUISE', null),
-       (4, 'Voucher16', 313.25, 'REST', null),
-       (1, 'Voucher17', 173.25, 'REST', null),
-       (3, 'Voucher18', 153.25, 'EXCURSION', null);
+INSERT INTO voucher(company_id, name, price, type, description, image)
+VALUES (2, 'Voucher', 123.25, 'THERAPY', null, 'greece.webp'),
+       (1, 'Voucher1', 136.75, 'SHOPPING', null, 'spain.webp'),
+       (2, 'Voucher2', 143.59, 'THERAPY', null, 'greece.webp'),
+       (1, 'Voucher3', 153.29, 'SHOPPING', null, 'spain.webp'),
+       (4, 'Voucher4', 167.49, 'EXCURSION', null, 'brazil.webp'),
+       (3, 'Voucher5', 173.46, 'CRUISE', null, 'belarus.webp'),
+       (1, 'Voucher6', 183.15, 'REST', null, 'spain.webp'),
+       (3, 'Voucher7', 199.25, 'THERAPY', null, 'belarus.webp'),
+       (2, 'Voucher8', 131.35, 'EXCURSION', null, 'greece.webp'),
+       (1, 'Voucher9', 143.55, 'THERAPY', null, 'spain.webp'),
+       (4, 'Voucher10', 123.45, 'REST', null, 'brazil.webp');
 
 CREATE TABLE voucher_info
 (
@@ -117,24 +126,17 @@ ALTER TABLE profile
     ALTER COLUMN birthday TYPE DATE;
 
 INSERT INTO voucher_info(voucher_id, country, start_at, end_at, transport, food)
-VALUES (1, 'BY', '2023-08-22', '2023-08-30', 'BUS', true),
-       (2, 'UK', '2023-09-22', '2023-09-30', 'BUS', false),
-       (3, 'USA', '2023-09-10', '2023-09-16', 'PLANE', true),
-       (4, 'PL', '2023-09-22', '2023-10-05', 'PLANE', false),
-       (5, 'USA', '2023-10-10', '2023-10-20', 'CRUISE', true),
-       (6, 'USA', '2023-11-01', '2023-11-08', 'CRUISE', false),
-       (7, 'BY', '2024-01-22', '2024-01-30', 'BUS', true),
-       (8, 'UK', '2024-02-22', '2024-02-28', 'BUS', true),
-       (9, 'BY', '2024-03-10', '2024-03-16', 'BUS', true),
-       (10, 'PL', '2024-04-22', '2024-05-05', 'PLANE', false),
-       (11, 'BY', '2024-06-10', '2024-06-20', 'BUS', true),
-       (12, 'PL', '2023-11-10', '2023-11-18', 'PLANE', false),
-       (13, 'BY', '2023-08-22', '2023-08-30', 'BUS', true),
-       (14, 'UK', '2023-09-22', '2023-09-30', 'CRUISE', false),
-       (15, 'BY', '2023-09-10', '2023-09-16', 'BUS', true),
-       (16, 'PL', '2023-09-22', '2023-10-05', 'PLANE', true),
-       (17, 'BY', '2023-10-10', '2023-10-20', 'BUS', true),
-       (18, 'USA', '2023-11-01', '2023-11-08', 'PLANE', false);
+VALUES (1, 'PL', '2023-08-22', '2023-08-30', 'BUS', 'AI'),
+       (2, 'BY', '2023-09-22', '2023-09-30', 'PLANE', 'EP'),
+       (3, 'UK', '2023-09-10', '2023-09-16', 'CRUISE', 'AI'),
+       (4, 'USA', '2023-09-22', '2023-10-05', 'BUS', 'BB'),
+       (5, 'BY', '2023-10-10', '2023-10-20', 'BUS', 'EP'),
+       (6, 'UK', '2023-11-01', '2023-11-08', 'BUS', 'BB'),
+       (7, 'USA', '2024-01-22', '2024-01-30', 'PLANE', 'FB'),
+       (8, 'PL', '2024-02-22', '2024-02-28', 'BUS', 'RO'),
+       (9, 'PL', '2024-03-10', '2024-03-16', 'CRUISE', 'HB'),
+       (10, 'BY', '2024-04-15', '2024-04-30', 'BUS', 'AI'),
+       (11, 'USA', '2024-06-20', '2024-06-28', 'PLANE', 'RO');
 
 ALTER TABLE voucher_info
     ALTER COLUMN food TYPE VARCHAR(32);
@@ -149,7 +151,6 @@ CREATE TABLE booking
 
 ALTER TABLE booking
     ADD COLUMN persons INT NOT NULL default 1;
-
 
 -- Select queries
 -- 1. Select voucher by transport
